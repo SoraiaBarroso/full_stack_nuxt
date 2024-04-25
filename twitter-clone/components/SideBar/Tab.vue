@@ -1,11 +1,11 @@
 <template>
     <div>
-        <nux-link to="#" class="flex items-center p-3 w-min hover:bg-gray-200 rounded-full" :class="defaultTransition">
+        <nux-link to="#" class="flex items-center p-3 w-min hover:bg-gray-200 rounded-full  dark:hover:bg-dim-200 dark:text-white" :class="defaultTransition">
             <div class="w-6 h-6 text-dark" :class="defaultTransition">
                 <slot name="icon"></slot>
             </div>
 
-            <div class="ml-4 text-lg">
+            <div class="ml-4 text-md" :class="textClasses">
                 <slot name="name"></slot>
             </div>
         </nux-link>
@@ -17,6 +17,7 @@ import useTailwindConfig from '~/composbles/useTailwindConfig';
 
 const { defaultTransition } = useTailwindConfig
 
+// if we pass active we set text to bold
 const props = defineProps({
     active: {
         type: Boolean,
@@ -24,5 +25,5 @@ const props = defineProps({
     }
 })
 
-
+const textClasses = computed(() => props.active ? 'font-semibold' : 'font-normal')
 </script>

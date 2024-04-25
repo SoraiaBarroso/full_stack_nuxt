@@ -10,7 +10,7 @@
             </nuxt-link>   
         </div>
 
-    <SideBarTab>
+    <SideBarTab active>
         <template v-slot:icon>
             <IconsHomeIcon/>
         </template>

@@ -19,6 +19,6 @@
 
 <script setup>
   // no importing due to nuxt
-  const darkMode = ref(false)
+  const darkMode = ref(true)
 
 </script>

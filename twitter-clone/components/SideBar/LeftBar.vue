@@ -10,15 +10,70 @@
             </nuxt-link>   
         </div>
 
-    <SideBarTab active>
-        <template v-slot:icon>
-            <IconsHomeIcon/>
-        </template>
-        <template v-slot:name>
-            Home
-        </template>
-    </SideBarTab>
+        <div class="mt-2 space-y-3">
+            <SideBarTab active>
+                <template v-slot:icon>
+                    <IconsHomeIcon/>
+                </template>
+                <template v-slot:name>
+                    Home
+                </template>
+            </SideBarTab>
 
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsSearchIcon/>
+                </template>
+                <template v-slot:name>
+                    Explore
+                </template>
+            </SideBarTab>
+
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsNotificationIcon/>
+                </template>
+                <template v-slot:name>
+                    Notifications
+                </template>
+            </SideBarTab>
+
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsMessageIcon/>
+                </template>
+                <template v-slot:name>
+                    Messages
+                </template>
+            </SideBarTab>
+
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsListIcon/>
+                </template>
+                <template v-slot:name>
+                    Lists
+                </template>
+            </SideBarTab>
+
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsUserIcon/>
+                </template>
+                <template v-slot:name>
+                    Profile
+                </template>
+            </SideBarTab>
+
+            <SideBarTab>
+                <template v-slot:icon>
+                    <IconsMoreIcon/>
+                </template>
+                <template v-slot:name>
+                    More
+                </template>
+            </SideBarTab>
+        </div>
     </div>
 </template>
 <script setup>

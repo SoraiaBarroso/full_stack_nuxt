@@ -3,76 +3,76 @@
         <div class="w-min p-2 my-2 rounded-full hover:bg-blue-50
         dark:hover:bg-white/20" :class="defaultTransition"
         >
-            <nuxt-link to="/">
+            <nux-link to="/">
                 <div class="w-8 h-8">
                     <IconsTwitter/>
                 </div>
-            </nuxt-link>   
+            </nux-link> 
         </div>
 
         <div class="mt-2 space-y-3">
-            <SideBarTab active>
+            <SideBarLeftBarTab active>
                 <template v-slot:icon>
                     <IconsHomeIcon/>
                 </template>
                 <template v-slot:name>
                     Home
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsSearchIcon/>
                 </template>
                 <template v-slot:name>
                     Explore
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsNotificationIcon/>
                 </template>
                 <template v-slot:name>
                     Notifications
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsMessageIcon/>
                 </template>
                 <template v-slot:name>
                     Messages
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsListIcon/>
                 </template>
                 <template v-slot:name>
                     Lists
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsUserIcon/>
                 </template>
                 <template v-slot:name>
                     Profile
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
 
-            <SideBarTab>
+            <SideBarLeftBarTab>
                 <template v-slot:icon>
                     <IconsMoreIcon/>
                 </template>
                 <template v-slot:name>
                     More
                 </template>
-            </SideBarTab>
+            </SideBarLeftBarTab>
         </div>
         
     </div>

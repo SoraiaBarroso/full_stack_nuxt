@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col">
         <!-- Input search -->
-        <input type="text" placeholder="Search" class="m-2 p-2 rounded-2xl bg-gray-100 dark:bg-dim-700"/>
+        <!-- <input type="text" placeholder="Search" class="m-2 p-2 rounded-2xl bg-gray-100 dark:bg-dim-700"/> -->
         <!-- Preview Card: whats happènign -->
         <SideBarRightBarPreviewCard title="What's happening">
             <SideBarRightBarCardItem v-for="data in whatsHappeninData">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="flex items-center h-full">
-                        <button class="hover:opacity-85 rounded-2xl px-4 py-2 font-bold text-xs text-white dark:text-black bg-black dark:bg-white">Follow</button>
+                        <button class="hover:opacity-85 rounded-full px-4 py-2 font-bold text-xs text-white dark:text-black bg-black dark:bg-white">Follow</button>
                     </div>
                 </div>
            </SideBarRightBarCardItem>

@@ -20,7 +20,7 @@
         <!-- Preview Card: who to follow -->
         <SideBarRightBarPreviewCard title="Who to follow">
            <SideBarRightBarCardItem v-for="data in whoToFollowData">
-                <div class="flex flex-row justify-between p-2">
+                <div class="flex flex-row justify-between w-full p-2 pl-0">
                     <div class="flex flex-row">
                         <img class="w-10 h-10 rounded-full" :src="data.image" alt="data.name">
                         
@@ -28,6 +28,9 @@
                             <h1 class="dark:text-white font-bold text-sm text-gray-800">{{ data.name }}</h1>
                             <p class="text-gray-500  dark:text-gray-500 text-sm">{{ data.handle }}</p>
                         </div>
+                    </div>
+                    <div class="flex items-center h-full">
+                        <button class="hover:opacity-85 rounded-2xl px-4 py-2 font-bold text-xs text-white dark:text-black bg-black dark:bg-white">Follow</button>
                     </div>
                 </div>
            </SideBarRightBarCardItem>

@@ -1,5 +1,5 @@
 <template>
-   <div class="p-3 flex justify-between hover:bg-gray-50 dark:text-white cursor-pointer dark:hover:bg-dim-300"
+   <div class="p-3 pt-2 flex justify-between hover:bg-gray-50 dark:text-white cursor-pointer dark:hover:bg-dim-300"
     :class="wrapperClasses">
         <slot></slot>
    </div>

@@ -1,7 +1,7 @@
 <template>
-   <div class="p-3 hover:bg-gray-50 dark:text-white cursor-pointer dark:hover:bg-dim-300"
+   <div class="p-3 flex justify-between hover:bg-gray-50 dark:text-white cursor-pointer dark:hover:bg-dim-300"
     :class="wrapperClasses">
-        Item
+        <slot></slot>
    </div>
 </template>
 <script setup>

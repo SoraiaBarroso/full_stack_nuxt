@@ -12,7 +12,7 @@
 
               <!-- Main -->
               <main class="col-span-11 md:col-span-8 xl:col-span-6">
-                  <router-view/>
+                  <NuxtPage/>
               </main>
 
               <!-- Right -->
@@ -21,6 +21,8 @@
                   <SideBarRightBar/>
                 </div>
               </div>
+
+              <SpeedInsights />
         </div>
     </div>
   </div>
@@ -28,6 +30,7 @@
 </template>
 
 <script setup>
+  import { SpeedInsights } from "@vercel/speed-insights/nuxt"
   // no importing due to nuxt
   const darkMode = ref(false)
 

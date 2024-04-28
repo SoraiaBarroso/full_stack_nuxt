@@ -3,11 +3,11 @@
         <div class="w-min p-2 my-2 rounded-full hover:bg-blue-50
         dark:hover:bg-white/20" :class="defaultTransition"
         >
-            <nux-link to="/">
+            <NuxtLink to="/">
                 <div class="w-8 h-8">
                     <IconsTwitter/>
                 </div>
-            </nux-link> 
+            </NuxtLink> 
         </div>
 
         <div class="mt-2 space-y-3">

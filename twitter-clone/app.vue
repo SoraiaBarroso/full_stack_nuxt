@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-  import { SpeedInsights } from "@vercel/speed-insights/nuxt"
+  import { SpeedInsights } from "@vercel/speed-insights/vue"
   // no importing due to nuxt
   const darkMode = ref(false)
 

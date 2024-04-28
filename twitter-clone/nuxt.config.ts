@@ -2,5 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
-  plugins: [ { src: '~/plugins/client-analytics.js', mode: 'client' }]
+  plugins: [ { src: '~/plugins/client-analytics.js', mode: 'client' }],
+
+  runtimeConfig: {
+    jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
+    jwtRefreshSecret: process.env.JWT_REFRESH_TOKEN_SECRET
+  }
 });

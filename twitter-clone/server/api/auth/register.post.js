@@ -2,7 +2,7 @@ import { sendError } from "h3"
 import { createUser } from "~/server/db/users"
 
 export default defineEventHandler(async (event) => {
-    const body = await useBody(event)
+    const body = await readBody(event)
 
     const {username, email, password, repeatPassword, name} = body
 
@@ -18,12 +18,13 @@ export default defineEventHandler(async (event) => {
         username,
         email,
         password,
-        name
+        name,
+        profileImage: 'https://picsum.photos/200/200'
     }
 
     const user = await createUser(userData)
 
     return {
-        body: body
+        body: user
     }
 })

@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
     // Generate Tokens
     // Acces token
     // Refresh token
-    const {accesToken, refreshToken} = generateTokens(user)
+    const {accessToken, refreshToken} = generateTokens(user)
 
     // Save it inside db
     await createRefreshToken({
@@ -53,6 +53,6 @@ export default defineEventHandler(async (event) => {
 
     return {
         user: userTransformer(user),
-        access_token: accesToken
+        access_token: accessToken
     }
 })

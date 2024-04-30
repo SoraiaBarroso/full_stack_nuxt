@@ -1,6 +1,6 @@
 <template>
-    <div>
-         <label for="" v-if="$props.label" class="block pl-3 ml-px text-sm font-medium text-gray-700">
+    <div class=" w-full">
+         <label for="" v-if="$props.label" class="block pl-1 pb-3 ml-px text-sm font-medium text-gray-700">
             {{ $props.label }}
         </label>
          <input @input="event => emits('update:modelValue', event.target.value)"

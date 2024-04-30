@@ -45,12 +45,25 @@ export default () => {
         })
     }
 
+    const getUser = () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const data = await $fetch('/api/auth/user')
+                setToken(data.access_token)
+
+                resolve(true)
+            } catch(error) {
+                reject(error)
+            }
+        })
+    }
+
     // call when we refresh the page
     const initAuth = () => {
         return new Promise(async (resolve, reject) => {
             try {
                 await refreshToken()
-
+                await getUser()
                 resolve(true)
             } catch(error) {
                 reject(error)

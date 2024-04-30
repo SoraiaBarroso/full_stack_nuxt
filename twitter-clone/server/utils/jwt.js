@@ -36,7 +36,6 @@ export const decodeAccessToken = (token) => {
     }
 }
 
-
 export const generateTokens = (user) => {
     const accessToken = generateAccessToken(user)
     const refreshToken = generateRefreshToken(user)

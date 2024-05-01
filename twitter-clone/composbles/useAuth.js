@@ -1,3 +1,5 @@
+import useFetchApi from "./useFetchApi"
+
 export default () => {
     const useAuthToken = () => useState('auth_token')
     const useAuthUser = () => useState('auth_user')
@@ -48,8 +50,8 @@ export default () => {
     const getUser = () => {
         return new Promise(async (resolve, reject) => {
             try {
-                const data = await $fetch('/api/auth/user')
-                setToken(data.access_token)
+                const data = await useFetchApi('/api/auth/user')
+                setUser(data.user)
 
                 resolve(true)
             } catch(error) {
@@ -74,6 +76,7 @@ export default () => {
     return {
         login,
         useAuthUser,
-        initAuth
+        initAuth,
+        useAuthToken
     }
 }

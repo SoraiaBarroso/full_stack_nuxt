@@ -40,7 +40,7 @@
 
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
-  import useAuth from "./composbles/useAuth";
+  import useAuth from "./composbles/useAuth";  
   
   const darkMode = ref(false)
 

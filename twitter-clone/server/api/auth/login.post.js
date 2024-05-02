@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
 
     // Compare password 
     const passwordMatch = await bcrypt.compare(password, user.password)
-    
+
     if (!passwordMatch) {
         return sendError(event, createError({
             statusCode: 400,
@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
     // Generate Tokens
     // Acces token
     // Refresh token
-    const {accessToken, refreshToken} = generateTokens(user)
+    const {accesToken, refreshToken} = generateTokens(user)
 
     // Save it inside db
     await createRefreshToken({
@@ -50,9 +50,9 @@ export default defineEventHandler(async (event) => {
 
     // add http only cookie for refresh token
     sendRefreshToken(event, refreshToken)
-
+    
     return {
         user: userTransformer(user),
-        access_token: accessToken
+        access_token: accesToken
     }
 })

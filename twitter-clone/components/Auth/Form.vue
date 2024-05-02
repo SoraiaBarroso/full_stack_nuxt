@@ -8,7 +8,7 @@
             type="password" v-model="data.password"/>
 
             <div>
-                <button @click="handleLogin">Login</button>
+                <button @click="handleLogin" class="px-4 py-2 text-left w-full rounded-full border-gray-700 text-gray-700">Login</button>
             </div>
         </div>
    </div>

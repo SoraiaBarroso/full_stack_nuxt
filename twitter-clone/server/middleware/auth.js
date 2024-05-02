@@ -4,20 +4,21 @@ import { getUserById } from "../db/users"
 
 export default defineEventHandler(async (event) => {
     const endpoints = [
-        '/api/auth/user'
+        '/api/auth/user',
+        '/api/user/tweets',
     ]
 
     const isHandledByThisMiddleware = endpoints.some(endopoint => {
         const pattern = new UrlPattern(endopoint)
 
-        return pattern.match(event.req.url)
+        return pattern.match(event.node.req.url)
     })
 
     if (!isHandledByThisMiddleware) {
         return
     }
 
-    const token = event.req.headers['authorization']?.split(' ')[1]
+    const token = event.node.req.headers['authorization']?.split(' ')[1]
 
     const decoded = decodeAccessToken(token)
 
@@ -38,4 +39,5 @@ export default defineEventHandler(async (event) => {
     } catch (error) {
         return
     }
+
 })

@@ -1,11 +1,11 @@
-import { parseCookies } from 'h3'
+import { parseCookies, sendError } from 'h3'
 import { getRefreshTokenByToken } from '~/server/db/refreshTokens'
 import { decodeRefreshToken, generateTokens } from '~/server/utils/jwt'
 import { getUserById } from '~/server/db/users'
 
 export default defineEventHandler(async (event) => {
     const cookies = parseCookies(event)
-
+   
     const refreshToken = cookies.refresh_token
 
     if (!refreshToken) {
@@ -23,9 +23,9 @@ export default defineEventHandler(async (event) => {
             statusMessage: 'Refresh token is invalid'
         }))
     }
-
+   
     const token = decodeRefreshToken(refreshToken)
-
+    
     try {
         const user = await getUserById(token.userId)
 

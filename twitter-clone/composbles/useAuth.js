@@ -1,4 +1,5 @@
 import useFetchApi from "./useFetchApi"
+import { jwtDecode } from "jwt-decode"
 
 export default () => {
     const useAuthToken = () => useState('auth_token')
@@ -32,22 +33,21 @@ export default () => {
                 })
                 setToken(data.access_token)
                 setUser(data.user)
-
                 resolve(true)
             } catch(error) {
                 reject(error)
             }
         })
     }
-
+    
     const refreshToken = () => {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = await $fetch('/api/auth/refresh')
-                setToken(data.access_token)
 
+                setToken(data.access_token)
                 resolve(true)
-            } catch(error) {
+            } catch (error) {
                 reject(error)
             }
         })
@@ -57,24 +57,44 @@ export default () => {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = await useFetchApi('/api/auth/user')
-                setUser(data.user)
 
+                setUser(data.user)
                 resolve(true)
-            } catch(error) {
+            } catch (error) {
                 reject(error)
             }
         })
     }
 
-    // call when we refresh the page
+    const reRefreshAccessToken = () => {
+        const authToken = useAuthToken()
+
+        if (!authToken.value) {
+            return
+        }
+
+        const jwt = jwtDecode(authToken.value)
+
+        const newRefreshTime = jwt.exp - 60000
+
+        setTimeout(async () => {
+            await refreshToken()
+            reRefreshAccessToken()
+        }, newRefreshTime);
+    }
+
     const initAuth = () => {
         return new Promise(async (resolve, reject) => {
             setIsAuthLoading(true)
             try {
                 await refreshToken()
                 await getUser()
+
+                reRefreshAccessToken()
+
                 resolve(true)
-            } catch(error) {
+            } catch (error) {
+                console.log(error)
                 reject(error)
             } finally {
                 setIsAuthLoading(false)
@@ -82,11 +102,28 @@ export default () => {
         })
     }
 
+    const logout = () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await useFetchApi('/api/auth/logout', {
+                    method: 'POST'
+                })
+
+                setToken(null)
+                setUser(null)
+                resolve()
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
+
     return {
         login,
         useAuthUser,
-        initAuth,
         useAuthToken,
-        useAuthLoading
+        initAuth,
+        useAuthLoading,
+        logout
     }
 }

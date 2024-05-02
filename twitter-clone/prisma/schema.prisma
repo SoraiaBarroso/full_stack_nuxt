@@ -26,6 +26,8 @@ model User {
   updatedAt     DateTime @updatedAt
 
   refreshToken  RefreshToken[]
+
+  Tweet         Tweet[]
 }
 
 model RefreshToken {
@@ -37,4 +39,22 @@ model RefreshToken {
 
   userId      String @db.ObjectId
   user        User @relation(fields: [userId], references: [id])
+}
+
+model Tweet {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  text        String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Author
+  author      User @relation(fields: [authorId], references: [id])
+  authorId    String @db.ObjectId
+
+  replyToId   String? @db.ObjectId
+  replies     Tweet[] @relation("replies")
+  replyTo     Tweet?  @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  // Media files
 }

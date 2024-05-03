@@ -10,19 +10,19 @@ export default defineEventHandler(async (event) => {
             if (err) {
                 reject(err)
             }
-            resolve({fields, files})
+            resolve({ fields, files })
         })
     })
-    
-    const {fields, files} = response
+
+    const { fields, files } = response
 
     const userId = event.context?.auth?.user?.id
-
+    
     const tweetData = {
-        text: fields.text,
+        text: fields.text[0],
         authorId: userId
     }
-
+   
     const tweet = await createTweet(tweetData)
 
     return {

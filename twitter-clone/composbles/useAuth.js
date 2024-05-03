@@ -120,12 +120,34 @@ export default () => {
         })
     }
 
+    const register = ({username, password, repeatPassword, email, name}) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const data = await $fetch('/api/auth/register', {
+                    method: 'POST',
+                    body: {
+                        username,
+                        password,
+                        repeatPassword,
+                        email,
+                        name
+                    }
+                })
+
+                resolve(true)
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
+
     return {
         login,
         useAuthUser,
         useAuthToken,
         initAuth,
         useAuthLoading,
-        logout
+        logout, 
+        register
     }
 }

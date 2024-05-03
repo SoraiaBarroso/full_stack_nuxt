@@ -17,7 +17,7 @@
 <script setup>
 import useAuth from '~/composbles/useAuth';
 
-const {login} = useAuth()
+const { login } = useAuth()
 
 // get password and username from child component
 const data = reactive({

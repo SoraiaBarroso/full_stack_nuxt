@@ -41,6 +41,8 @@ export default defineEventHandler(async (event) => {
 
         const cloudinaryResource = await uploadToCloudinary(file[0].filepath)
 
+        // console.log(cloudinaryResource)
+
         return createMediaFile({
             url: cloudinaryResource.secure_url,
             providerPublicId: cloudinaryResource.public_id,
@@ -52,7 +54,6 @@ export default defineEventHandler(async (event) => {
     await Promise.all(filePromises)
 
     return {
-        // tweet: tweetTransformer(tweet)
-        files
+        tweet: tweetTransformer(tweet)
     }
 })

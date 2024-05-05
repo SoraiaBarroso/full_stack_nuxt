@@ -1,7 +1,9 @@
 <template>
     <div>
         <MainSection title="Home" :loading="loading">
-            {{ user }}
+            <!-- {{ user }} -->
+            <!-- pass user object -->
+            <TweetForm :user="user"/>
         </MainSection>
     </div>
 </template>

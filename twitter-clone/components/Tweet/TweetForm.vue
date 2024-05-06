@@ -1,13 +1,19 @@
 <template>
     <div>
-        <!-- pass user object -->
-        <TweetInput :user="props.user" @onSubmit="handleFormSubmit"/>
+        <div v-if="loading" class="flex items-center justify-center py-6">
+            <IconsSpinner/>
+        </div>
+        <div v-else>
+              <!-- pass user object -->
+            <TweetInput :user="props.user" @onSubmit="handleFormSubmit"/>
+        </div>
     </div>
 </template>
 <script setup>
 import useTweets from '~/composbles/useTweets';
 
 const  { postTweet } = useTweets()
+const loading = ref(false)
 
 const props = defineProps({
     user: {
@@ -17,6 +23,7 @@ const props = defineProps({
 })
 
 async function handleFormSubmit(data) {
+    loading.value = true
     try {
         const response = await postTweet({
             text: data.text,
@@ -25,6 +32,8 @@ async function handleFormSubmit(data) {
         console.log(response)
     } catch(error) {
         console.log(error)
+    } finally {
+        loading.value = false
     }
 }
 

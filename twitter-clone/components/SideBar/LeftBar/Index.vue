@@ -73,6 +73,10 @@
                     More
                 </template>
             </SideBarLeftBarTab>
+            
+            <div>
+                <UIButton>Tweet</UIButton>
+            </div>
         </div>
         
     </div>

@@ -13,7 +13,7 @@
 
         <!-- File selector -->
         <div class="p-4 pt-0 pl-16">
-            <img class="rounded-2xl border" :src="inputImageUrl" v-if="inputImageUrl" alt="">
+            <img class="rounded-2xl border border-white-200 dark:border-gray-700" :src="inputImageUrl" v-if="inputImageUrl" alt="Image uploaded by user">
 
             <div class="w-full border-t mt-4"></div>
 
@@ -40,8 +40,8 @@
                     <IconsCalendarIcon/>
                 </div>
             </div>
-
-            <button :disabled="!text" class="disabled:bg-blue-300  dark:disabled:bg-blue-500/30 rounded-full bg-blue-500 font-semibold px-3 py-2 text-white" @click="handleFormSubmit">Tweet</button>
+            
+            <UIButton size="sm" :disabled="!text" @click="handleFormSubmit">Tweet</UIButton>
         </div>
     </div>
 </template>

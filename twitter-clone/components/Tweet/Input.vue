@@ -41,7 +41,7 @@
                 </div>
             </div>
             
-            <UIButton size="sm" :disabled="!text" @click="handleFormSubmit">Tweet</UIButton>
+            <UIButton size="sm" :disabled="isDisabled" @onClick="handleFormSubmit">Tweet</UIButton>
         </div>
     </div>
 </template>
@@ -52,6 +52,8 @@ const emit = defineEmits(['onSubmit'])
 const imageInput = ref()
 const selectedFile = ref(null)
 const inputImageUrl = ref(null)
+
+const isDisabled = computed(() => text.value === '')
 
 const props = defineProps({
     user: {

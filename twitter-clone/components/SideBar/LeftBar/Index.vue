@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen flex flex-col">
+    <div class="h-screen flex flex-col xl:items-start xs:items-center">
         <div class="w-min p-2 my-2 rounded-full hover:bg-blue-50
         dark:hover:bg-white/20" :class="defaultTransition"
         >
@@ -10,7 +10,7 @@
             </NuxtLink> 
         </div>
 
-        <div class="mt-2 space-y-3">
+        <div class="mt-2 space-y-3 flex flex-col xs:justify-center xs:align-middle">
             <SideBarLeftBarTab active>
                 <template v-slot:icon>
                     <IconsHomeIcon/>
@@ -74,8 +74,16 @@
                 </template>
             </SideBarLeftBarTab>
             
-            <div>
-                <UIButton>Tweet</UIButton>
+            <div class="hidden xl:block">
+                <UIButton liquid size="lg">Tweet</UIButton>
+            </div>
+
+            <div class="block xl:hidden">
+                <UIButton>
+                    <div class="w-6 h-6 font-bold">
+                        <IconsPostIcon/>
+                    </div>
+                </UIButton>
             </div>
         </div>
         

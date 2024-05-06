@@ -1,13 +1,13 @@
 <template>
-    <button :disabled="disabled" class="disabled:cursor-not-allowed disabled:bg-blue-300 dark:disabled:bg-blue-500/30 rounded-full bg-blue-400 hover:bg-blue-500 font-bold font-sm text-white"
-    :class="classes">
+    <button :disabled="props.disabled" class="flex justify-center items-center disabled:cursor-not-allowed disabled:bg-blue-300 dark:disabled:bg-blue-500/30 rounded-full bg-blue-400 hover:bg-blue-500 font-bold font-sm text-white"
+    :class="classes" @click="handleClick">
         <span :class="textFontSize">
             <slot />
         </span>
     </button>
 </template>
 <script setup>
-import { defineProps, computed } from 'vue';
+const emits = defineEmits(['onClick'])
 
 const props = defineProps({
   disabled: {
@@ -44,5 +44,17 @@ const textFontSize = computed(() => {
     }
 })
 
-const classes = computed(() => `${paddingClasses.value}`)
+const defaultWidth = computed(() => {
+    switch (props.size) {
+        default:
+            return 'w-min'
+    }
+})
+
+const classes = computed(() => `${paddingClasses.value} ${props.liquid ? "w-full" : defaultWidth.value}`)
+
+function handleClick(event) {
+    emits('onClick', event)
+}
+
 </script>

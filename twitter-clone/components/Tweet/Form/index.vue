@@ -5,7 +5,7 @@
         </div>
         <div v-else>
               <!-- pass user object -->
-            <TweetInput :user="props.user" @onSubmit="handleFormSubmit"/>
+            <TweetFormInput :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>
     </div>
 </template>

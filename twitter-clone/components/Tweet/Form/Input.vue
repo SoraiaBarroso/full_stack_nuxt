@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <div class=" flex items-center flex-shrink-0 p-4">
+    <div class="border-x border-white-200 dark:border-gray-700">
+        <div class="flex items-center flex-shrink-0 p-4">
             
             <div class="flex w-12 items-top">
-                <img :src="props.user?.profileImage" alt="" class="inline-block w-10 h-10 rounded-full"
+                <img :src="props.user?.profileImage" alt="" class="hover:brightness-90 inline-block w-10 h-10 rounded-full"
             </div>
 
             <div class="w-full">
@@ -22,7 +22,7 @@
         </div>
 
         <!-- Icons -->
-        <div class="flex justify-between pl-14 pr-6 border-b border-white-200 dark:border-gray-700 pb-3">
+        <div class="flex justify-between pl-14 pr-6 pb-3">
             <div class="flex">
                 <div @click="handleImageClick" class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsImageIcon/>

@@ -4,7 +4,7 @@
         dark:bg-dim-900/80">
             <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 ">{{ $props.title }}</h2>
         </div>
-        <div v-if="props.loading" :class="twitterBorderColor" class="flex items-center justify-center p-4 border-b ">
+        <div v-if="props.loading" :class="twitterBorderColor" class="flex items-center justify-center p-4 border ">
             <IconsSpinner/>
         </div>
         <!--Main content-->

@@ -6,7 +6,7 @@
     
         <div class="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6
         lg:flex-none lg:px-20 xl:px-24">
-            <!-- Conditional rendering based on the value of isLoginForm -->
+                <!-- Conditional rendering based on the value of isLoginForm -->
                 <AuthFormLogIn v-if="isLoginForm"/>
                 <AuthFormRegister v-else/>
                 <div class="mt-4">

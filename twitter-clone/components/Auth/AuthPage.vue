@@ -10,7 +10,7 @@
                 <AuthFormLogIn v-if="isLoginForm"/>
                 <AuthFormRegister v-else/>
                 <div class="mt-4">
-                <!-- Toggle between login and register forms -->
+                    <!-- Toggle between login and register forms -->
                     <button @click="toggleForm" class="text-sm text-blue-500">Switch to {{ isLoginForm ? 'Register' : 'Login' }}</button>
                 </div>
         </div>

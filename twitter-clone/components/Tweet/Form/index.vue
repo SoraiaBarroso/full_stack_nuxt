@@ -15,6 +15,8 @@ import useTweets from '~/composbles/useTweets';
 const  { postTweet } = useTweets()
 const loading = ref(false)
 
+const emit = defineEmits(['tweetPosted']);
+
 const props = defineProps({
     user: {
         type: Object,
@@ -30,10 +32,12 @@ async function handleFormSubmit(data) {
             mediaFiles: data.mediaFiles
         })
         console.log(response)
+        emit('tweetPosted')
     } catch(error) {
         console.log(error)
     } finally {
         loading.value = false
+        
     }
 }
 

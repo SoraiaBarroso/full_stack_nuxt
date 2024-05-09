@@ -46,7 +46,7 @@ export default () => {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = await $fetch('/api/auth/refresh')
-
+                
                 setToken(data.access_token)
                 resolve(true)
             } catch (error) {

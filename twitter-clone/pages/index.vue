@@ -7,10 +7,10 @@
 
             <div class="border-b border-white-200 dark:border-gray-700">
                 <!-- pass user object -->
-                <TweetForm :user="user"/>
+                <TweetForm :user="user" @tweetPosted="reloadHomeTweets"/>
             </div>
 
-            <TweetListFeed :tweets="homeTweets"/>
+            <TweetListFeed :tweets="homeTweets" />
         </MainSection>
     </div>
 </template>
@@ -26,18 +26,20 @@ const { getHomeTweets } = useTweets()
 
 const user = useAuthUser()
 
-onBeforeMount(async () => {
-    loading.value = true
-
+const reloadHomeTweets = async () => {
+    loading.value = true;
     try {
-        const { tweets } = await getHomeTweets()
-
-        homeTweets.value = tweets
+        const { tweets } = await getHomeTweets();
+        homeTweets.value = tweets;
     } catch(error) {
-        console.log(error)
+        console.log(error);
     } finally {
-        loading.value = false
+        loading.value = false;
     }
-})
+}
+
+onMounted(() => {
+    reloadHomeTweets(); // Load home tweets initially
+});
 
 </script>

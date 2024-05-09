@@ -8,6 +8,8 @@ export default defineEventHandler(async (event) => {
    
     const refreshToken = cookies.refresh_token
 
+    console.log("api/refresh/ refresh token: ", refreshToken)
+
     if (!refreshToken) {
         return sendError(event, createError({
             statusCode: 401,
@@ -16,6 +18,8 @@ export default defineEventHandler(async (event) => {
     }
 
     const rToken = await getRefreshTokenByToken(refreshToken)
+    
+    console.log("api/refresh/  rtoken: ", rToken)
 
     if (!rToken) {
         return sendError(event, createError({

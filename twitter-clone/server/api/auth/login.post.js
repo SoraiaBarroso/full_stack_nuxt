@@ -40,7 +40,9 @@ export default defineEventHandler(async (event) => {
     // Generate Tokens
     // Acces token
     // Refresh token
-    const {accesToken, refreshToken} = generateTokens(user)
+    const { accessToken, refreshToken } = generateTokens(user)
+
+    console.log("tokens: ", accessToken + "refresh: ",  refreshToken)
 
     // Save it inside db
     await createRefreshToken({
@@ -50,9 +52,11 @@ export default defineEventHandler(async (event) => {
 
     // add http only cookie for refresh token
     sendRefreshToken(event, refreshToken)
+
+    console.log("user log-in: ", user)
     
     return {
         user: userTransformer(user),
-        access_token: accesToken
+        access_token: accessToken
     }
 })

@@ -1,6 +1,7 @@
 import { sendError } from "h3"
 import { createUser } from "~/server/db/users"
 import { userTransformer } from "~/server/transformers/user"
+import { createRefreshToken } from "~/server/db/refreshTokens"
 
 
 export default defineEventHandler(async (event) => {
@@ -9,11 +10,17 @@ export default defineEventHandler(async (event) => {
     const { username, email, password, repeatPassword, name } = body
 
     if (!username || !email || !password || !repeatPassword) {
-        return sendError(event, createError({ statusCode: 400, statusMessage: 'Invalid params' }))
+        return sendError(event, createError({ 
+            statusCode: 400, 
+            statusMessage: 'Invalid params' 
+        }))
     }
 
     if (password !== repeatPassword) {
-        return sendError(event, createError({ statusCode: 400, statusMessage: 'Passwords do not match' }))
+        return sendError(event, createError({
+            statusCode: 400, 
+            statusMessage: 'Passwords do not match' 
+        }))
     }
 
     const userData = {
@@ -26,7 +33,23 @@ export default defineEventHandler(async (event) => {
 
     const user = await createUser(userData)
 
+    const { accessToken, refreshToken } = generateTokens(user)
+
+    console.log("tokens: ", accessToken + "refresh: ",  refreshToken)
+
+    // Save it inside db
+    await createRefreshToken({
+        token: refreshToken,
+        userId: user.id
+    })
+
+    // add http only cookie for refresh token
+    sendRefreshToken(event, refreshToken)
+
+    console.log("user register: ", user)
+    
     return {
-        body: userTransformer(user)
+        body: userTransformer(user),
+        access_token: accessToken
     }
 })

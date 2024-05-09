@@ -15,7 +15,7 @@
             <UIInput placeholder="@name" label="Name" v-model="data.name"/>
 
             <div>
-                <button @click="handleRegister" class="px-4 py-2 text-left w-full rounded-full border-gray-700 text-gray-700">Register</button>
+                <UIButton @click="handleRegister" liquid size="sm" :disabled="!isFormAvailable">Register</UIButton>
             </div>
 
         </div>
@@ -34,6 +34,12 @@ const data = reactive({
     email: '',
     name: '',
     loading: false
+})
+
+const isFormAvailable = ref(false)
+
+watchEffect(() => {
+    isFormAvailable.value = data.username !== '' && data.email !== '' && data.password !== '' && data.repeatPassword !== ''
 })
 
 async function handleRegister() {

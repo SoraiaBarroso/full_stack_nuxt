@@ -6,13 +6,9 @@
     
         <div class="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6
         lg:flex-none lg:px-20 xl:px-24">
-                <!-- Conditional rendering based on the value of isLoginForm -->
-                <AuthFormLogIn v-if="isLoginForm"/>
-                <AuthFormRegister v-else/>
-                <div class="mt-4">
-                    <!-- Toggle between login and register forms -->
-                    <button @click="toggleForm" class="text-sm text-blue-500">Switch to {{ isLoginForm ? 'Register' : 'Login' }}</button>
-                </div>
+                <AuthFormLogIn v-if="isLoginForm"/> 
+                <AuthFormRegister v-else />             
+                <span v-if="isLoginForm" class="pt-5 ml-1 cursor-default text-gray-700 text-sm">Don't have an account?<button class="text-blue-600 ml-1" @click="switchForm">Register</button></span>
         </div>
     </div>
 </template>
@@ -21,7 +17,7 @@
 const isLoginForm = ref(true);
 
 // Function to toggle between login and register forms
-const toggleForm = () => {
+const switchForm = () => {
   isLoginForm.value = !isLoginForm.value;
 };
 </script>

@@ -1,6 +1,7 @@
 <template>
    <div>
         <div class="pt-5 space-y-6 w-80">
+            <h1 class="text-gray-600 font-bold pb-4 text-4xl text-left dark:text-white">Log in to Twitter</h1>
 
             <UIInput placeholder="@username" label="Username" v-model="data.username"/>
             
@@ -8,7 +9,7 @@
             type="password" v-model="data.password"/>
 
             <div>
-                <button @click="handleLogin" class="px-4 py-2 text-left w-full rounded-full border-gray-700 text-gray-700">Login</button>
+                <UIButton @click="handleLogin" liquid size="sm" :disabled="!isFormAvailable">Log In</UIButton>
             </div>
         </div>
    </div>
@@ -24,6 +25,12 @@ const data = reactive({
     password: '',
     username: '',
     loading: false
+})
+
+const isFormAvailable = ref(false)
+
+watchEffect(() => {
+    isFormAvailable.value = data.password !== '' && data.username !== ''
 })
 
 async function handleLogin() {

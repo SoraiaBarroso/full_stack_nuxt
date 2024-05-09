@@ -8,9 +8,9 @@
             <span class=" text-gray-800 font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
         
             <span class="ml-1 text-sm font-medium text-gray-600">
-                <nuxt-link to="#">
+                <NuxtLink to="#">
                     {{ author.handle }}
-                </nuxt-link>
+                </NuxtLink>
                 · {{ props.tweet.postedAtHuman }}
             </span>
 
@@ -19,9 +19,9 @@
                     Replying to
                 </span>
 
-                <nuxt-link :to="replyToTweetUrl" class="text-blue-400">
+                <NuxtLink :to="replyToTweetUrl" class="text-blue-400">
                     {{ props.tweet.replyTo.author.handle }}
-                </nuxt-link>
+                </NuxtLink>
             </p>
         </div>
     </div>

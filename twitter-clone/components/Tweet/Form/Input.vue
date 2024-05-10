@@ -15,7 +15,7 @@
         <div class="p-4 pt-0 pl-16">
             <img class="rounded-2xl border border-white-200 dark:border-gray-700" :src="inputImageUrl" v-if="inputImageUrl" alt="Image uploaded by user">
 
-            <div class="w-full border-t mt-4"></div>
+            <div class="w-full border-t border-white-200 dark:border-gray-700 mt-4"></div>
 
             <input type="file" ref="imageInput" hidden
             accept="image/png, image/gif, image/jpeg" @change="handleImageChange">

@@ -44,17 +44,17 @@ const whoToFollowData = ref([
     {
         name: 'Elon Musk',
         handle: '@ElonMusk',
-        image: 'https://picsum.photos/200/200'
+        image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
     {
         name: 'Mark Zuckerberg',
         handle: '@MarkZuckerberg',
-        image: 'https://picsum.photos/200/200'
+        image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
     {
         name: 'Bill Gates',
         handle: '@BillGates',
-        image: 'https://picsum.photos/200/200'
+        image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
 ])
 

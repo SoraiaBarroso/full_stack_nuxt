@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 flex">
+    <div class="p-4 pb-0 flex">
         <div>
             <img class="w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
         </div>

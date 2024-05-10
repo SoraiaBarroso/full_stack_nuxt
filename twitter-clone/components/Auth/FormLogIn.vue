@@ -1,10 +1,14 @@
 <template>
    <div>
-        <div class="pt-5 space-y-6 w-80">
-            <IconsTwitter class="h-12 w-12 m-auto mb-14"/>
+        <div class="pt-5 space-y-6 w-80 relative">
+            <IconsTwitter class="h-10 w-10 m-auto mb-10"/>
 
             <UIInput placeholder="@username" label="Username" v-model="data.username"/>
             
+            <div v-if="data.loading" class="bg-white top-0 h-96 w-full absolute flex justify-center items-center">
+                <IconsSpinner />
+            </div>
+
             <UIInput placeholder="*********" label="Password" 
             type="password" v-model="data.password"/>
 
@@ -35,16 +39,16 @@ watchEffect(() => {
 
 async function handleLogin() {
     data.loading = true
-   try {
+    try {
         await login({
             username: data.username,
             password: data.password
         })
-   } catch(error) {
+    } catch(error) {
         console.log(error)
-   } finally {
+    } finally {
         data.loading = false
-   }
+    }
 }
 
 </script>

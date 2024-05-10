@@ -1,7 +1,7 @@
 <template>
    <div>
         <div class="pt-5 space-y-6 w-80">
-            <h1 class="text-gray-600 font-bold pb-4 text-4xl text-left dark:text-white">Log in to Twitter</h1>
+            <IconsTwitter class="h-12 w-12 m-auto mb-14"/>
 
             <UIInput placeholder="@username" label="Username" v-model="data.username"/>
             

@@ -9,6 +9,7 @@
                 <AuthFormLogIn v-if="isLoginForm"/> 
                 <AuthFormRegister v-else />             
                 <span v-if="isLoginForm" class="pt-5 ml-1 cursor-default text-gray-700 text-sm">Don't have an account?<button class="text-blue-600 ml-1" @click="switchForm">Register</button></span>
+                <span v-else class="pt-5 ml-1 cursor-default text-gray-700 text-sm">Already an user?<button class="text-blue-600 ml-1" @click="switchForm">Log In</button></span>
         </div>
     </div>
 </template>

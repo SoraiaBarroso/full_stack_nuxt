@@ -3,18 +3,21 @@
         <div class="pt-5 space-y-6 w-80 relative">
             <IconsTwitter class="h-10 w-10 m-auto mb-10"/>
 
-            <UIInput placeholder="@username" label="Username" v-model="data.username"/>
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="@username" label="Username" v-model="data.username"/>
             
             <div v-if="data.loading" class="bg-white top-0 h-96 w-full absolute flex justify-center items-center">
                 <IconsSpinner />
             </div>
 
-            <UIInput placeholder="*********" label="Password" 
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Password" 
             type="password" v-model="data.password"/>
+
+            <div v-if="data.errorMessage" class="text-red-500">{{ data.errorMessage }}</div>
 
             <div>
                 <UIButton @click="handleLogin" liquid size="sm" :disabled="!isFormAvailable">Log In</UIButton>
             </div>
+
         </div>
    </div>
 </template>
@@ -28,6 +31,7 @@ const { login } = useAuth()
 const data = reactive({
     password: '',
     username: '',
+    errorMessage: '',
     loading: false
 })
 
@@ -45,7 +49,7 @@ async function handleLogin() {
             password: data.password
         })
     } catch(error) {
-        console.log(error)
+        data.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred' // Extract relevant part of error message        console.log(error)
     } finally {
         data.loading = false
     }

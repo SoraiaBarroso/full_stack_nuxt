@@ -1,21 +1,25 @@
 <template>
      <div>
-        <div class="pt-5 space-y-6 w-80">
+        <div class="pt-5 space-y-6 w-80 relative">
 
-            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="@username" label="Username" v-model="data.username"/>
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="@username" label="Username *" v-model="data.username"/>
             
-            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="*********" label="Password" 
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Password *" 
             type="password" v-model="data.password"/>
 
-            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="*********" label="Repeat password" 
+            <div v-if="data.loading" class="bg-white top-0 h-screen w-full absolute flex justify-center dark:bg-dim-900 items-center">
+                <IconsSpinner class="mb-20"/>
+            </div>
+
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Repeat password *" 
             type="password" v-model="data.repeatPassword"/>
 
-            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="@email" label="Email" v-model="data.email"/>
+            <UIInput :invalid="data.errorMessage !== ''" placeholder="email" label="Email *" v-model="data.email"/>
 
-            <UIInput placeholder="@name" label="Name" v-model="data.name"/>
+            <UIInput placeholder="name" label="Name" v-model="data.name"/>
 
             <div v-if="data.errorMessage" class="text-red-500">{{ data.errorMessage }}</div>
-            
+
             <div>
                 <UIButton @click="handleRegister" liquid size="sm" :disabled="!isFormAvailable">Register</UIButton>
             </div>

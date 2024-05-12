@@ -43,7 +43,7 @@
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
   
-  const darkMode = ref(true)
+  const darkMode = ref(false)
 
   const { useAuthUser, initAuth, useAuthLoading } = useAuth()
   const isAuthLoading = useAuthLoading()

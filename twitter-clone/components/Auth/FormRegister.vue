@@ -2,18 +2,20 @@
      <div>
         <div class="pt-5 space-y-6 w-80">
 
-            <UIInput placeholder="@username" label="Username" v-model="data.username"/>
+            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="@username" label="Username" v-model="data.username"/>
             
-            <UIInput placeholder="*********" label="Password" 
+            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="*********" label="Password" 
             type="password" v-model="data.password"/>
 
-            <UIInput placeholder="*********" label="Repeat password" 
+            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="*********" label="Repeat password" 
             type="password" v-model="data.repeatPassword"/>
 
-            <UIInput placeholder="@email" label="Email" v-model="data.email"/>
+            <UIInput :required="true" :invalid="data.errorMessage !== ''" placeholder="@email" label="Email" v-model="data.email"/>
 
             <UIInput placeholder="@name" label="Name" v-model="data.name"/>
 
+            <div v-if="data.errorMessage" class="text-red-500">{{ data.errorMessage }}</div>
+            
             <div>
                 <UIButton @click="handleRegister" liquid size="sm" :disabled="!isFormAvailable">Register</UIButton>
             </div>
@@ -33,6 +35,7 @@ const data = reactive({
     repeatPassword: '',
     email: '',
     name: '',
+    errorMessage: '',
     loading: false
 })
 
@@ -53,6 +56,7 @@ async function handleRegister() {
             name: data.name,
         })
     } catch(error) {
+        data.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred'
         console.log(error)
     } finally {
         data.loading = false

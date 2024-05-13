@@ -7,8 +7,12 @@
                 {{ props.tweet.text }}
             </p>
 
-            <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mr-2 border-2 rounded-2xl border-white-200 dark:border-gray-700">
+            <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mr-4 border-2 rounded-2xl border-white-200 dark:border-gray-700">
                 <img class="w-full rounded-2xl" :src="image.url" alt="Tweet image">
+            </div>
+
+            <div class="mt-2">
+                <TweetItemActions />
             </div>
         </div>
     </div>

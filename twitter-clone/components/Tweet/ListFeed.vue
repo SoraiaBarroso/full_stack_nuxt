@@ -1,6 +1,13 @@
 <template>
     <div>
-        <div class="border-x border-white-200 dark:border-gray-700"
+
+        <div v-if="isEmptyArray">
+            <p class="text-gray-700 dark:text-white w-full text-center pt-4">
+                No posted tweets &#x1F614;
+            </p>
+        </div>
+
+        <div v-else class="border-x border-white-200 dark:border-gray-700"
         v-for="tweet in $props.tweets" :key="tweet.id" :class="defaultTransition">
             <TweetItem :tweet="tweet" />        
         </div>
@@ -16,4 +23,6 @@ const props = defineProps({
         required: true
     }
 })
+
+const isEmptyArray = computed(() => props.tweets.length === 0)
 </script>

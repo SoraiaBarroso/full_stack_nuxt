@@ -1,16 +1,20 @@
 <template>
     <div class="dark:group-hover:bg-opacity-20 flex items-center group text-gray-500 cursor-pointer">
-        <div :class="defaultTransition" class="p-2 group-hover:bg-blue-100 group-hover:text-blue-400 rounded-full">
-            <IconsChatIcon class="w-5 h-5"/>
+        <div :class="`p-2 group-hover:bg-${props.color}-100 text-gray-600 group-hover:text-${props.color}-400 rounded-full`">
+            
+            <slot name="icon" classes="w-5 h-5"/>
         </div>
 
-        <span class="text-md group-hover:text-blue-400">
-            5
+        <span :class="`text-sm group-hover:text-${props.color}-400`" >
+            <slot name="default"></slot>
         </span>
     </div>
 </template>
 <script setup>
-import useTailwindConfig from '~/composbles/useTailwindConfig';
-
-const {defaultTransition} = useTailwindConfig()
+const props = defineProps({
+    color: {
+        type: String,
+        required: true
+    }
+})
 </script>

@@ -12,7 +12,7 @@
             </div>
 
             <div class="mt-1 mr-5">
-                <TweetItemActions />
+                <TweetItemActions :tweet="tweet"/>
             </div>
 
         </div>

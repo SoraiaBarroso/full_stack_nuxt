@@ -7,7 +7,7 @@
                 </template>
 
                 <template v-slot:default> 
-                    4
+                    {{ props.tweet.repliesCount }}
                 </template>
             </TweetItemActionsIcons>
 
@@ -17,7 +17,7 @@
                 </template>
 
                 <template v-slot:default> 
-                    518
+                    {{ generateRandomNumber() }}
                 </template>
             </TweetItemActionsIcons>
 
@@ -27,7 +27,7 @@
                 </template>
 
                 <template v-slot:default> 
-                    9.4K
+                    {{ generateRandomNumber() }}
                 </template>
             </TweetItemActionsIcons>
 
@@ -37,7 +37,7 @@
                 </template>
 
                 <template v-slot:default> 
-                    85K
+                    {{ generateRandomNumber() }}
                 </template>
             </TweetItemActionsIcons>
         </div>
@@ -61,3 +61,21 @@
         </div>
     </div>
 </template>
+<script setup>
+const props = defineProps({
+    tweet: {
+        type: Object,
+        required: true
+    }
+})
+
+function generateRandomNumber() {
+    let ran = Math.floor(Math.random() * 10000);
+    if (ran > 1000) {
+        let formattedNumber = (ran / 1000).toFixed(1);
+        return `${formattedNumber}K`;
+    } else {
+        return ran;
+    }
+}
+</script>

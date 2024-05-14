@@ -17,19 +17,7 @@
                     <NInput v-model:value="model.password" placeholder="**********"  type="password" round/>
                 </NFormItem>
             </NForm>
-           
-
-            <!-- <UIInput :invalid="data.errorMessage !== ''" placeholder="@username" label="Username *" v-model="data.username"/>
-            
-            <div v-if="data.loading" class="bg-white top-0 h-96 w-full absolute flex justify-center dark:bg-dim-900 items-center">
-                <IconsSpinner class="mb-10"/>
-            </div>
-
-            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Password *" 
-            type="password" v-model="data.password"/>
-
-            <div v-if="data.errorMessage" class="text-red-500">{{ data.errorMessage }}</div> -->
-
+        
             <div>
                 <UIButton @click="handleLogin" liquid size="sm" :disabled="!isFormAvailable">Log In</UIButton>
             </div>
@@ -43,13 +31,14 @@ import useAuth from '~/composbles/useAuth';
 import { NInput, NForm, NFormItem, useMessage } from 'naive-ui'
 import { watchImmediate } from '@vueuse/core'
 
+const { login } = useAuth()
+
 const formRef = ref(null) // keep track of input values
 const message = useMessage()
 
 const model = reactive({
     username: '',
     password: '', 
-    loading: false,
     errorMessage: ''
 })
 
@@ -62,16 +51,6 @@ const rules = {
   ]
 }
 
-const { login } = useAuth()
-
-// get password and username from child component
-// const data = reactive({
-//     password: '',
-//     username: '',
-//     errorMessage: '',
-//     loading: false
-// })
-
 const isFormAvailable = ref(false)
 
 watchImmediate(model, () => {
@@ -79,16 +58,20 @@ watchImmediate(model, () => {
 }, { deep: true })
 
 async function handleLogin() {
-    model.loading = true
     try {
+        message.loading('Logging in...')
+        
         await login({
             username: model.username,
             password: model.password
         })
+        
+        message.success('Login successful!')
     } catch(error) {
-        model.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred' // Extract relevant part of error message        console.log(error)
+        model.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred' 
+        message.error(model.errorMessage)
     } finally {
-        model.loading = false
+        message.clear()
     }
 }
 

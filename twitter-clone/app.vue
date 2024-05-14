@@ -1,51 +1,53 @@
 <template>
-  <n-message-provider>
-    <div :class="{'dark': darkMode}">
-      <div class="bg-white dark:bg-dim-900">
+  <n-config-provider :theme-overrides="themeOverrides">
+    <n-message-provider>
+      <div :class="{'dark': darkMode}">
+        <div class="bg-white dark:bg-dim-900">
 
-        <!-- Loading page  -->
-        <LoadinPage v-if="isAuthLoading"/>
+          <!-- Loading page  -->
+          <LoadinPage v-if="isAuthLoading"/>
 
-        <!-- App  -->
-        <div v-else-if="user" class="min-h-full">
-          <div class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-6 lg:gap-5">
-              
-                <!-- left -->
-                <div class="md:block md:col-span-1 xs-col-span-1 xl:col-span-2 overflow-y-auto">
-                  <div class="sticky top-0">
-                    <SideBarLeftBar/>
+          <!-- App  -->
+          <div v-else-if="user" class="min-h-full">
+            <div class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-6 lg:gap-5">
+                
+                  <!-- left -->
+                  <div class="md:block md:col-span-1 xs-col-span-1 xl:col-span-2 overflow-y-auto">
+                    <div class="sticky top-0">
+                      <SideBarLeftBar/>
+                    </div>
                   </div>
-                </div>
 
-                <!-- Main -->
-                <main class="col-span-11 md:col-span-8 xl:col-span-6 overflow-y-auto">
-                    <NuxtPage/>
-                </main>
+                  <!-- Main -->
+                  <main class="col-span-11 md:col-span-8 xl:col-span-6 overflow-y-auto">
+                      <NuxtPage/>
+                  </main>
 
-                <!-- Right -->
-                <div class="hidden md:block xl:col-span-4 md:col-span-3 overflow-y-auto">
-                  <div class="sticky top-0">
-                    <SideBarRightBar/>
+                  <!-- Right -->
+                  <div class="hidden md:block xl:col-span-4 md:col-span-3 overflow-y-auto">
+                    <div class="sticky top-0">
+                      <SideBarRightBar/>
+                    </div>
                   </div>
-                </div>
 
-                <SpeedInsights />
+                  <SpeedInsights />
+            </div>
           </div>
+
+          <!-- Auth  -->
+          <AuthPage v-else/>
+
         </div>
-
-        <!-- Auth  -->
-        <AuthPage v-else/>
-
       </div>
-    </div>
-  </n-message-provider>
+    </n-message-provider>
+  </n-config-provider>
 </template>
 
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
-  import { NMessageProvider } from 'naive-ui'
-
+  import { NMessageProvider, NConfigProvider  } from 'naive-ui'
+  
   const darkMode = ref(false)
 
   const { useAuthUser, initAuth, useAuthLoading } = useAuth()
@@ -55,4 +57,12 @@
   onBeforeMount(() => {
     initAuth()
   })
+
+  const themeOverrides = {
+    Input: {
+      borderHover: '1px solid #3B82F6',
+      borderFocus: '1px solid #3B82F6',
+      caretColor: '#3B82F6'
+    },
+  }
 </script>

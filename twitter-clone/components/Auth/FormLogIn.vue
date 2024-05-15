@@ -47,7 +47,7 @@ const rules = {
     { required: true, message: 'Email is required', trigger: 'blur' }
   ],
   password: [
-    { required: true, message: 'Password is required', trigger: 'blur' }
+    { required: true, message: 'Password is required', trigger: 'blur' },
   ]
 }
 
@@ -74,5 +74,4 @@ async function handleLogin() {
         message.clear()
     }
 }
-
 </script>

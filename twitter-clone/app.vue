@@ -60,9 +60,14 @@
 
   const themeOverrides = {
     Input: {
-      borderHover: '1px solid #3B82F6',
-      borderFocus: '1px solid #3B82F6',
-      caretColor: '#3B82F6'
+      borderHover: !darkMode.value ? '1px solid #3B82F6' : '1px solid #a5e4ff',
+      borderFocus: !darkMode.value ? '1px solid #3B82F6' : '1px solid #a5e4ff ',
+      caretColor: !darkMode.value ? '#3B82F6' : "#ffffff",
     },
+    Form: {
+      labelTextColor: !darkMode.value ? '#374151' : '#e3e3dd',
+      feedbackTextColorError: !darkMode.value ? '' : '#ff8383',
+      asteriskColor: !darkMode.value ? '' : '#ff8383',
+    }
   }
 </script>

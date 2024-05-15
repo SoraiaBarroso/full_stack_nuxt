@@ -2,24 +2,33 @@
      <div>
         <div class="pt-5 space-y-6 w-80 relative">
 
-            <UIInput :invalid="data.errorMessage !== ''" placeholder="@username" label="Username *" v-model="data.username"/>
-            
-            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Password *" 
-            type="password" v-model="data.password"/>
+            <NForm
+                ref="formRef"
+                :label-width="80"
+                :model="model"
+                :rules="rules"
+            >
+                <NFormItem label="Username" path="username">
+                    <NInput v-model:value="model.username" placeholder="@username" round/>
+                </NFormItem>
 
-            <div v-if="data.loading" class="bg-white top-0 h-screen w-full absolute flex justify-center dark:bg-dim-900 items-center">
-                <IconsSpinner class="mb-20"/>
-            </div>
+                <NFormItem label="Password" path="password">
+                    <NInput v-model:value="model.password" placeholder="**********" type="password" round/>
+                </NFormItem>
 
-            <UIInput :invalid="data.errorMessage !== ''" placeholder="*********" label="Repeat password *" 
-            type="password" v-model="data.repeatPassword"/>
+                <NFormItem label="Repeat password" path="repeatPassword">
+                    <NInput v-model:value="model.repeatPassword" placeholder="**********" type="password" round/>
+                </NFormItem>
 
-            <UIInput :invalid="data.errorMessage !== ''" placeholder="email" label="Email *" v-model="data.email"/>
+                <NFormItem label="Email" path="email">
+                    <NInput type="email" v-model:value="model.email" placeholder="email" round/>
+                </NFormItem>
 
-            <UIInput placeholder="name" label="Name" v-model="data.name"/>
-
-            <div v-if="data.errorMessage" class="text-red-500">{{ data.errorMessage }}</div>
-
+                <NFormItem label="Name" path="name">
+                    <NInput v-model:value="model.name" placeholder="name" round/>
+                </NFormItem>
+            </NForm>
+           
             <div>
                 <UIButton @click="handleRegister" liquid size="sm" :disabled="!isFormAvailable">Register</UIButton>
             </div>
@@ -29,41 +38,71 @@
 </template>
 <script setup>
 import useAuth from '~/composbles/useAuth';
+import { NInput, NForm, NFormItem, useMessage } from 'naive-ui'
+import { watchImmediate } from '@vueuse/core'
 
 const { register } = useAuth()
+const formRef = ref(null) 
+const message = useMessage()
 
-// get data from child component
-const data = reactive({
+const model = reactive({
     username: '',
     password: '',
     repeatPassword: '',
     email: '',
     name: '',
     errorMessage: '',
-    loading: false
 })
+
+const rules = {
+  username: [
+    { required: true, message: 'Username is required', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: 'Password is required', trigger: 'blur' }
+  ],
+  repeatPassword: [
+    { required: true, message: 'Repeat password is required', trigger: 'blur' },
+    { validator: checkPasswordMatch, trigger: 'blur' } // Custom validation rule
+  ],
+  email: [
+    { required: true, message: 'Email is required', trigger: 'blur' }
+  ],
+}
 
 const isFormAvailable = ref(false)
 
-watchEffect(() => {
-    isFormAvailable.value = data.username !== '' && data.email !== '' && data.password !== '' && data.repeatPassword !== ''
-})
+watchImmediate(model, () => {
+    isFormAvailable.value = model.username !== '' && model.email !== '' && model.password !== '' && model.repeatPassword !== '' && model.password === model.repeatPassword
+}, { deep: true })
 
 async function handleRegister() {
-    data.loading = true
     try {
+        message.loading('Registring...')
+
         await register({
-            username: data.username,
-            password: data.password,
-            repeatPassword: data.repeatPassword,
-            email: data.email,
-            name: data.name,
+            username: model.username,
+            password: model.password,
+            repeatPassword: model.repeatPassword,
+            email: model.email,
+            name: model.name,
         })
+
+        message.success('Registered successful!')
     } catch(error) {
-        data.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred'
-        console.log(error)
+        model.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred'
+        message.error(model.errorMessage)
     } finally {
-        data.loading = false
+        message.clear()
+    }
+}
+
+
+function checkPasswordMatch(rule, value, callback) {
+    if (value !== model.password) {
+        callback(new Error('The passwords do not match'))
+    } else {
+        callback() // Pass validation
     }
 }
 </script>

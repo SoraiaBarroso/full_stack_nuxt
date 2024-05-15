@@ -1,6 +1,6 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
-    <n-message-provider>
+  <NConfigProvider :theme-overrides="themeOverrides">
+    <NMessageProvider>
       <div :class="{'dark': darkMode}">
         <div class="bg-white dark:bg-dim-900">
 
@@ -39,8 +39,8 @@
 
         </div>
       </div>
-    </n-message-provider>
-  </n-config-provider>
+    </NMessageProvider>
+  </NConfigProvider>
 </template>
 
 <script setup>

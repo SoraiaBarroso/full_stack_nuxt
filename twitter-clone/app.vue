@@ -45,7 +45,7 @@
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
-  import { NMessageProvider, NConfigProvider  } from 'naive-ui'
+  import { NMessageProvider  } from 'naive-ui'
   import { compareAsc, format } from "date-fns";
   
   const darkMode = ref(false)

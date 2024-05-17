@@ -47,7 +47,6 @@
   import useAuth from "./composbles/useAuth";  
   import { NMessageProvider, NConfigProvider  } from 'naive-ui'
   import { compareAsc, format } from "date-fns";
-  import { VResizeObserver } from 'vueuc'
 
   const darkMode = ref(false)
 

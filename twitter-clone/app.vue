@@ -1,5 +1,5 @@
 <template>
-  <NConfigProvider :theme-overrides="themeOverrides">
+  <NConfigProvider :theme-overrides="themeOverrides" inline-theme-disabled>
     <NMessageProvider>
       <div :class="{'dark': darkMode}">
         <div class="bg-white dark:bg-dim-900">
@@ -45,7 +45,7 @@
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
-  import { NMessageProvider  } from 'naive-ui'
+  import { NMessageProvider, NConfigProvider  } from 'naive-ui'
   import { compareAsc, format } from "date-fns";
   
   const darkMode = ref(false)

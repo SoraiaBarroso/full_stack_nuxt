@@ -40,39 +40,78 @@
 <script setup>
 import SettingsIcons from '~/components/Icons/SettingsIcons.vue';
 
+function getRandomUser(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const names = [
+  { name: 'Elon Musk', handle: '@ElonMusk' },
+  { name: 'Mark Zuckerberg', handle: '@MarkZuckerberg' },
+  { name: 'Bill Gates', handle: '@BillGates' },
+  { name: 'Sundar Pichai', handle: '@SundarPichai' },
+  { name: 'Tim Cook', handle: '@TimCook' },
+  { name: 'Satya Nadella', handle: '@SatyaNadella' },
+  { name: 'Jeff Bezos', handle: '@JeffBezos' },
+  { name: 'Larry Page', handle: '@LarryPage' },
+  { name: 'Sergey Brin', handle: '@SergeyBrin' },
+  { name: 'Sheryl Sandberg', handle: '@SherylSandberg' }
+];
+
 const whoToFollowData = ref([
     {
-        name: 'Elon Musk',
-        handle: '@ElonMusk',
+        name: getRandomUser(names).name,
+        handle: getRandomUser(names).handle,
         image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
     {
-        name: 'Mark Zuckerberg',
-        handle: '@MarkZuckerberg',
+        name: getRandomUser(names).name,
+        handle: getRandomUser(names).handle,
         image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
     {
-        name: 'Bill Gates',
-        handle: '@BillGates',
+        name: getRandomUser(names).name,
+        handle: getRandomUser(names).handle,
         image: `https://picsum.photos/seed/${Math.random()}/200/200`
     },
 ])
 
+const data = [
+  "SpaceX", "#CodingIsFun", "#VueJs", "#Nuxt",
+  "#JavaScript", "#WebDevelopment", "#100DaysOfCode", "#AI", "#MachineLearning",
+  "#Tech", "#Programming", "#Frontend", "#Backend", "#FullStack",
+  "#NodeJS", "#ReactJS", "#Angular", "#DevOps", "#CloudComputing",
+  "#CyberSecurity", "#DataScience", "#BigData", "#Blockchain", "#QuantumComputing"
+];
+
+const getRandomTitle = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)]
+}
+
+function generateRandomNumber() {
+    let ran = Math.floor(Math.random() * 50000);
+    if (ran > 10000) {
+        let formattedNumber = (ran / 1000).toFixed(1);
+        return `${formattedNumber}K posts`;
+    } else {
+        return `${ran} posts`;
+    }
+}
+
 const whatsHappeninData = ref([
     {
         trending: '1 · Trending',
-        title: 'SpaceX',
-        count: '40.8k posts'
+        title: getRandomTitle(data),
+        count: generateRandomNumber()
     },
     {
         trending: '2 · Trending',
-        title: '#CodingIsFun',
-        count: '8,880 posts'
+        title: getRandomTitle(data),
+        count: generateRandomNumber()
     },
     {
         trending: '3 · Trending',
-        title: '#VueJs',
-        count: '1,000 posts'
+        title: getRandomTitle(data),
+        count: generateRandomNumber()
     },
 ])
 </script>

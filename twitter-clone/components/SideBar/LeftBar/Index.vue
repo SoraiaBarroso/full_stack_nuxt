@@ -11,7 +11,10 @@
         </div>
 
         <div class="mt-2 space-y-3 flex flex-col xs:justify-center xs:align-middle">
-            <SideBarLeftBarTab active>
+            <SideBarLeftBarTab 
+                :active="activeTab === 'home'"
+                @click="setActiveTab('home')"
+            >
                 <template v-slot:icon>
                     <IconsHomeIcon/>
                 </template>
@@ -20,7 +23,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'explore'"
+                @click="setActiveTab('explore')"
+            >
                 <template v-slot:icon>
                     <IconsSearchIcon/>
                 </template>
@@ -29,7 +35,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'notifications'"
+                @click="setActiveTab('notifications')"
+            >
                 <template v-slot:icon>
                     <IconsNotificationIcon/>
                 </template>
@@ -38,7 +47,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'messages'"
+                @click="setActiveTab('messages')"
+            >
                 <template v-slot:icon>
                     <IconsMessageIcon/>
                 </template>
@@ -47,7 +59,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'lists'"
+                @click="setActiveTab('lists')"
+            >
                 <template v-slot:icon>
                     <IconsListIcon/>
                 </template>
@@ -56,7 +71,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'profile'"
+                @click="setActiveTab('profile')"
+            >
                 <template v-slot:icon>
                     <IconsUserIcon/>
                 </template>
@@ -65,7 +83,10 @@
                 </template>
             </SideBarLeftBarTab>
 
-            <SideBarLeftBarTab>
+            <SideBarLeftBarTab
+                :active="activeTab === 'more'"
+                @click="setActiveTab('more')"
+            >
                 <template v-slot:icon>
                     <IconsMoreIcon/>
                 </template>
@@ -93,4 +114,10 @@
 import useTailwindConfig from '~/composbles/useTailwindConfig';
 
 const { defaultTransition } = useTailwindConfig
+
+const activeTab = ref('home'); // Default active tab
+
+const setActiveTab = (tab) => {
+    activeTab.value = tab;
+};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <NConfigProvider :theme-overrides="themeOverrides" inline-theme-disabled>
+  <NConfigProvider :theme-overrides="themeOverrides" >
     <NMessageProvider>
       <div :class="{'dark': darkMode}">
         <div class="bg-white dark:bg-dim-900">
@@ -66,8 +66,8 @@
     },
     Form: {
       labelTextColor: !darkMode.value ? '#374151' : '#e3e3dd',
-      feedbackTextColorError: !darkMode.value ? '' : '#ff8383',
-      asteriskColor: !darkMode.value ? '' : '#ff8383',
+      feedbackTextColorError: !darkMode.value ? '#D22B2B' : '#ff8383',
+      asteriskColor: !darkMode.value ? '#D22B2B' : '#ff8383',
     }
   }
 </script>

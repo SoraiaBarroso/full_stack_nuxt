@@ -113,5 +113,10 @@ const whatsHappeninData = ref([
         title: getRandomTitle(data),
         count: generateRandomNumber()
     },
+    {
+        trending: '4 · Trending',
+        title: getRandomTitle(data),
+        count: generateRandomNumber()
+    }
 ])
 </script>

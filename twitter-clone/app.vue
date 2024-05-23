@@ -7,7 +7,7 @@
           <LoadinPage v-if="isAuthLoading"/>
 
           <!-- App  -->
-          <div v-else-if="user" class="min-h-full">
+          <div v-else-if="user" class="min-h-full w-full">
             <div class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-6 lg:gap-5">
                 
                   <!-- left -->

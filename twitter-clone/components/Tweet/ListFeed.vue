@@ -6,6 +6,7 @@
                 No posted tweets &#x1F614;
             </p>
         </div>
+        
 
         <div v-else class="border-x border-white-200 dark:border-gray-700"
         v-for="tweet in $props.tweets" :key="tweet.id" :class="defaultTransition">

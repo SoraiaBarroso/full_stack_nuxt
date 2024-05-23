@@ -7,7 +7,7 @@
             </div>
 
             <div class="w-full">
-                <textarea placeholder="What's happening?" v-model="text" class="w-full h-10 text-lg text-gray-900 placeholder:text-gray-500 bg-transparent border-0 dark:text-white focus:ring-0 resize-none"></textarea>
+                <textarea :placeholder="props.placeholder" v-model="text" class="w-full h-10 text-lg text-gray-900 placeholder:text-gray-500 bg-transparent border-0 dark:text-white focus:ring-0 resize-none"></textarea>
             </div>
         </div>
 
@@ -58,6 +58,10 @@ const isDisabled = computed(() => text.value === '')
 const props = defineProps({
     user: {
         type: Object,
+        required: true
+    },
+    placeholder: {
+        type: String,
         required: true
     }
 })

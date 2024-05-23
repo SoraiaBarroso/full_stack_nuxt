@@ -5,7 +5,7 @@
         </div>
         <div v-else>
               <!-- pass user object -->
-            <TweetFormInput :user="props.user" @onSubmit="handleFormSubmit"/>
+            <TweetFormInput :placeholder="props.placeholder" :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>
     </div>
 </template>
@@ -21,6 +21,10 @@ const props = defineProps({
     user: {
         type: Object,
         required: true
+    },
+    placeholder: {
+        type: String,
+        default: "What's happening?"
     }
 })
 

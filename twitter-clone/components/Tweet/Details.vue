@@ -2,7 +2,9 @@
     <div>
         <TweetItem :tweet="props.tweet"/>
 
-        <TweetForm />
+        <TweetForm placeholder="Tweet your reply" :user="props.user"/>
+
+        <TweetListFeed :tweets="replies"/>
     </div>
 </template>
 
@@ -17,4 +19,6 @@ const props = defineProps({
         required: true
     }
 })
+
+const replies = computed(() => props.tweet?.replies ||  [])
 </script>

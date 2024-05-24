@@ -5,7 +5,7 @@
         </div>
         <div v-else>
               <!-- pass user object -->
-            <TweetFormInput :placeholder="props.placeholder" :user="props.user" @onSubmit="handleFormSubmit"/>
+            <TweetFormInput :placeholder="props.placeholder" :reply-to="props.replyTo" :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>
     </div>
 </template>
@@ -24,7 +24,11 @@ const props = defineProps({
     },
     placeholder: {
         type: String,
-        default: "What's happening?"
+        default: "What is happening?!"
+    },
+    replyTo: {
+        type: Object,
+        default: null
     }
 })
 
@@ -33,7 +37,8 @@ async function handleFormSubmit(data) {
     try {
         const response = await postTweet({
             text: data.text,
-            mediaFiles: data.mediaFiles
+            mediaFiles: data.mediaFiles,
+            replyTo: props.replyTo?.id
         })
         console.log(response)
         emit('tweetPosted')

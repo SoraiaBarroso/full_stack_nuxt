@@ -7,6 +7,7 @@
             </div>
 
             <div class="w-full">
+                <p v-if="props.replyTo" class="text-gray-600 text-sm ml-3 mb-2">Replying to <span class="cursor-pointer text-blue-400">{{ props.replyTo.author.handle }}</span></p>
                 <textarea :placeholder="props.placeholder" v-model="text" class="w-full h-10 text-lg text-gray-900 placeholder:text-gray-500 bg-transparent border-0 dark:text-white focus:ring-0 resize-none"></textarea>
             </div>
         </div>
@@ -63,6 +64,10 @@ const props = defineProps({
     placeholder: {
         type: String,
         required: true
+    },
+    replyTo: {
+        type: Object,
+        default: null
     }
 })
 

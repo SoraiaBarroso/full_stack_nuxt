@@ -41,5 +41,4 @@ const reloadHomeTweets = async () => {
 onMounted(() => {
     reloadHomeTweets(); // Load home tweets initially
 });
-
 </script>

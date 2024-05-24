@@ -5,7 +5,7 @@
             <TweetItemHeader :tweet="props.tweet"/>
 
             <div :class="tweetBodyWrapper">
-                <p class="px-2 flex-shrink font-medium text-gray-800 w-auto dark:text-white">
+                <p :class="textSize" class="px-2 flex-shrink font-medium text-gray-800 w-auto dark:text-white">
                     {{ props.tweet.text }}
                 </p>
 
@@ -33,6 +33,7 @@ const props = defineProps({
     }
 })
 
+const textSize = computed(() => props.compact ? 'text-base' : 'text-lg')
 const tweetBodyWrapper = computed(() => props.compact ? 'ml-16' : 'ml-3 mt-6')
 const replyToTweetUrl = computed(() => `/status/${props.tweet?.id}`)
 

@@ -48,7 +48,7 @@
   import { NMessageProvider, NConfigProvider  } from 'naive-ui'
   import { compareAsc, format } from "date-fns";
   import vueuc from 'naive-ui';
-  const { VResizeObserver } = 'vueuc';
+  const { VResizeObserver } = 'naive-ui';
 
   const darkMode = ref(false)
 

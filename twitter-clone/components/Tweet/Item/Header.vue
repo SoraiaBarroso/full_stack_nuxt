@@ -5,9 +5,9 @@
         </div>
 
         <div class="ml-3 h-auto">
-            <span class=" text-gray-800 font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
+            <span :class="hasMargin" class=" text-gray-800 font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
         
-            <span class="ml-1  text-sm font-medium text-gray-600">
+            <span class="text-sm text-left font-medium text-gray-600">
                 <NuxtLink to="#">
                     {{ author.handle }}
                 </NuxtLink>
@@ -37,6 +37,7 @@ const props = defineProps({
     }
 })
 
+const hasMargin = computed(() => author.name ? 'mr-1' : 'mr-0')
 const author = props.tweet.author
 const replyToTweetUrl = computed(() => `/status/${props.tweet?.replyTo?.id}`)
 </script>

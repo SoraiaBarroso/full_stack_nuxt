@@ -5,7 +5,7 @@
         </div>
         <div v-else>
               <!-- pass user object -->
-            <TweetFormInput :placeholder="props.placeholder" :reply-to="props.replyTo" :user="props.user" @onSubmit="handleFormSubmit"/>
+            <TweetFormInput :popup="props.popup" :placeholder="props.placeholder" :reply-to="props.replyTo" :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>
     </div>
 </template>
@@ -29,6 +29,10 @@ const props = defineProps({
     replyTo: {
         type: Object,
         default: null
+    },
+    popup: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -40,8 +44,7 @@ async function handleFormSubmit(data) {
             mediaFiles: data.mediaFiles,
             replyTo: props.replyTo?.id
         })
-        console.log(response)
-        emit('tweetPosted')
+        emit('tweetPosted', response.tweet)
     } catch(error) {
         console.log(error)
     } finally {

@@ -95,7 +95,20 @@
                 </template>
             </SideBarLeftBarTab>
             
-            <div class="hidden xl:block">
+            <NModal
+                v-model:show="showModal"
+                class="custom-card"
+                preset="card"
+                :bordered="false"
+                size="huge"
+                :style="bodyStyle"
+                title="Tweet"
+                :segmented="segmented"
+            >            
+                <TweetForm :user="user" :reply-to="tweet"  @tweet-posted="handleUpdate"  :popup="true"/>
+            </NModal>
+
+            <div class="hidden xl:block" @click="showModal = true">
                 <UIButton liquid size="lg">Tweet</UIButton>
             </div>
 
@@ -112,12 +125,37 @@
 </template>
 <script setup>
 import useTailwindConfig from '~/composbles/useTailwindConfig';
+import { NModal } from "naive-ui"
+import useAuth from '~/composbles/useAuth';
+import useTweets from '~/composbles/useTweets';
 
+const { useAuthUser } = useAuth()
+const { getTweetById } = useTweets()
 const { defaultTransition } = useTailwindConfig
 
+const tweet = ref(null)
+const user = useAuthUser()
+
 const activeTab = ref('home'); // Default active tab
+const showModal = ref(false)
 
 const setActiveTab = (tab) => {
     activeTab.value = tab;
 };
+
+const bodyStyle = {
+  width: '600px',  
+  height: '350px'
+}
+
+const segmented = {
+  content: 'soft',
+  footer: 'soft'
+}
+
+function handleUpdate(tweet) {
+    navigateTo({
+        path: `/status/${tweet.id}`
+    })
+}
 </script>

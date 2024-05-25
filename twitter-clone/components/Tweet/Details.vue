@@ -2,7 +2,7 @@
     <div>
         <TweetItem :tweet="props.tweet"/>
 
-        <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" @reply-posted="addReply"/>
+        <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" @tweet-posted="handleUpdate"/>
 
         <TweetListFeed :tweets="replies"/>
     </div>
@@ -21,4 +21,10 @@ const props = defineProps({
 })
 
 const replies = computed(() => props.tweet?.replies ||  [])
+
+function handleUpdate(tweet) {
+    navigateTo({
+        path: `/status/${tweet.id}`
+    })
+}
 </script>

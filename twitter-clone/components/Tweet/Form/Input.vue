@@ -1,5 +1,6 @@
 <template>
-    <div class="border-x border-white-200 dark:border-gray-700">
+    <div :class="popUpStyleBorder" class="border-x ">
+
         <div class="flex items-center flex-shrink-0 p-4">
             
             <div class="flex w-12 items-top">
@@ -23,7 +24,7 @@
         </div>
 
         <!-- Icons -->
-        <div class="flex justify-between pl-14 pr-6 pb-3">
+        <div class="flex justify-between pl-14 pr-6 pb-3" :class="popUpStyleFooter">
             <div class="flex">
                 <div @click="handleImageClick" class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsImageIcon/>
@@ -42,7 +43,9 @@
                 </div>
             </div>
             
-            <UIButton size="sm" :disabled="isDisabled" @onClick="handleFormSubmit">Tweet</UIButton>
+            <div class="w-24">
+                <UIButton size="sm" :liquid="props.popup" :disabled="isDisabled" @onClick="handleFormSubmit">Tweet</UIButton>
+            </div>
         </div>
     </div>
 </template>
@@ -68,8 +71,14 @@ const props = defineProps({
     replyTo: {
         type: Object,
         default: null
+    },
+    popup: {
+        type: Boolean,
+        default: false
     }
 })
+
+const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-white-200 dark:border-gray-700')
 
 function handleFormSubmit() {
     emit('onSubmit', {

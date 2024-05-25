@@ -27,6 +27,8 @@ function getTweetIdFromRoute() {
     return useRoute().params.id
 }
 
+watch(() => useRoute().fullPath, () => getTweet())
+
 async function getTweet() {
     loading.value = true
     try {

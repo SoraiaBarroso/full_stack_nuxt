@@ -41,7 +41,8 @@
 import SettingsIcons from '~/components/Icons/SettingsIcons.vue';
 
 function getRandomUser(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
 
 const names = [
@@ -58,22 +59,31 @@ const names = [
 ];
 
 const whoToFollowData = ref([
-    {
-        name: getRandomUser(names).name,
-        handle: getRandomUser(names).handle,
-        image: `https://picsum.photos/seed/${Math.random()}/200/200`
-    },
-    {
-        name: getRandomUser(names).name,
-        handle: getRandomUser(names).handle,
-        image: `https://picsum.photos/seed/${Math.random()}/200/200`
-    },
-    {
-        name: getRandomUser(names).name,
-        handle: getRandomUser(names).handle,
-        image: `https://picsum.photos/seed/${Math.random()}/200/200`
-    },
-])
+  (() => {
+    const user = getRandomUser(names);
+    return {
+      name: user.name,
+      handle: user.handle,
+      image: `https://picsum.photos/seed/${Math.random()}/200/200`
+    };
+  })(),
+  (() => {
+    const user = getRandomUser(names);
+    return {
+      name: user.name,
+      handle: user.handle,
+      image: `https://picsum.photos/seed/${Math.random()}/200/200`
+    };
+  })(),
+  (() => {
+    const user = getRandomUser(names);
+    return {
+      name: user.name,
+      handle: user.handle,
+      image: `https://picsum.photos/seed/${Math.random()}/200/200`
+    };
+  })()
+]);
 
 const data = [
   "SpaceX", "#CodingIsFun", "#VueJs", "#Nuxt",

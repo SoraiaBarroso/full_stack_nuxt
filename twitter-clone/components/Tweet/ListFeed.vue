@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div v-if="isEmptyArray">
+        <div v-if="isEmptyArray && !props.detailsFeed">
             <p class="text-gray-700 dark:text-white w-full text-center pt-4">
                 No posted tweets &#x1F614;
             </p>
@@ -22,6 +22,10 @@ const props = defineProps({
     tweets: {
         type: Array,
         required: true
+    },
+    detailsFeed: {
+        type: Boolean,
+        default: false
     }
 })
 

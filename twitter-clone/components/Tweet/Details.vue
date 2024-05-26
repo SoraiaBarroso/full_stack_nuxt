@@ -4,7 +4,7 @@
 
         <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" @tweet-posted="handleUpdate"/>
 
-        <TweetListFeed :tweets="replies"/>
+        <TweetListFeed :details-feed="true" :tweets="replies"/>
     </div>
 </template>
 

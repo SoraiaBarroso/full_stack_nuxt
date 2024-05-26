@@ -6,7 +6,7 @@
                 <slot name="icon"></slot>
             </div>
 
-            <div class="ml-4 text-md hidden xl:block" :class="textClasses">
+            <div class="ml-4 text-md hidden md:block xl:block" :class="textClasses">
                 <slot name="name"></slot>
             </div>
         </NuxtLink>

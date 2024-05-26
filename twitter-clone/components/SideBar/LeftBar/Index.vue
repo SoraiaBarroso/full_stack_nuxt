@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen flex flex-col xl:items-start xs:items-center">
-        <div class="w-min p-2 my-2 rounded-full hover:bg-blue-50
+    <div class="h-screen flex flex-col md:items-start xl:items-start xs:items-center">
+        <div class="w-min p-2 my-1 rounded-full hover:bg-blue-50
         dark:hover:bg-white/20" :class="defaultTransition"
         >
             <NuxtLink to="/">
@@ -10,7 +10,7 @@
             </NuxtLink> 
         </div>
 
-        <div class="mt-2 space-y-3 flex flex-col xs:justify-center xs:align-middle">
+        <div class="mt-2 space-y-2 flex flex-col xs:justify-center xs:align-middle">
             <SideBarLeftBarTab 
                 :active="activeTab === 'home'"
                 @click="setActiveTab('home')"
@@ -108,11 +108,11 @@
                 <TweetForm :user="user" :reply-to="tweet"  @tweet-posted="handleUpdate"  :popup="true"/>
             </NModal>
 
-            <div class="hidden xl:block" @click="showModal = true">
+            <div class="hidden md:block xl:block" @click="showModal = true">
                 <UIButton liquid size="lg">Tweet</UIButton>
             </div>
 
-            <div class="block xl:hidden">
+            <div class="block md:hidden xl:hidden">
                 <UIButton>
                     <div class="w-6 h-6 font-bold">
                         <IconsPostIcon/>
@@ -145,7 +145,8 @@ const setActiveTab = (tab) => {
 
 const bodyStyle = {
   width: '600px',  
-  height: '350px'
+  height: '300px',
+  borderRadius: '20px',
 }
 
 const segmented = {
@@ -154,6 +155,7 @@ const segmented = {
 }
 
 function handleUpdate(tweet) {
+    showModal.value = false
     navigateTo({
         path: `/status/${tweet.id}`
     })

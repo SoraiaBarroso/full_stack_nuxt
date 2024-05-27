@@ -2,7 +2,8 @@
     <div>
         <TweetItem :tweet="props.tweet"/>
 
-        <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" @tweet-posted="handleUpdate"/>
+        <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" 
+        @tweet-posted="handleUpdate"/>
 
         <TweetListFeed :details-feed="true" :tweets="replies"/>
     </div>
@@ -22,9 +23,12 @@ const props = defineProps({
 
 const replies = computed(() => props.tweet?.replies ||  [])
 
+const emits = defineEmits(['reply'])
+
 function handleUpdate(tweet) {
-    navigateTo({
-        path: `/status/${tweet.id}`
-    })
+    emits('reply')
+    // navigateTo({
+    //     path: `/status/${tweet.id}`
+    // })
 }
 </script>

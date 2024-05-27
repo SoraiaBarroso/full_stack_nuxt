@@ -6,7 +6,7 @@
                 <Title></Title>
             </Head>
 
-            <TweetDetails :user="user" :tweet="tweet"/>
+            <TweetDetails @reply="getTweet" :user="user" :tweet="tweet"/>
 
         </MainSection>
     </div>
@@ -27,13 +27,10 @@ function getTweetIdFromRoute() {
     return useRoute().params.id
 }
 
-watch(() => useRoute().fullPath, () => getTweet())
-
 async function getTweet() {
     loading.value = true
     try {
        const response = await getTweetById(getTweetIdFromRoute())
-        
        tweet.value = response.tweet
     } catch(error) {
         console.log(error)

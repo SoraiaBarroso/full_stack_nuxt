@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "prisma generate && nuxt prepare "
+    "postinstall": "prisma generate && nuxt prepare",
+    "start": "nuxt start"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",

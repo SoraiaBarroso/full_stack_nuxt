@@ -29,8 +29,9 @@ export default defineEventHandler(async (event) => {
     const replyTo = fields.replyTo[0]
 
     if (replyTo && replyTo !== 'null' && replyTo !== 'undefined') {
-        tweetData.replyToId = replyTo[0]
+        tweetData.replyToId = replyTo
     }
+
     const tweet = await createTweet(tweetData)
 
     const filePromises = Object.keys(files).map(async key => {

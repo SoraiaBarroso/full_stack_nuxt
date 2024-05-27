@@ -14,7 +14,7 @@
                     <!-- left -->
                     <div class="md:block md:col-span-2 xs-col-span-1 xl:col-span-2 overflow-y-auto">
                       <div class="sticky top-0">
-                        <SideBarLeftBar/>
+                        <SideBarLeftBar @click="handleOpenTweetModal"/>
                       </div>
                     </div>
 
@@ -37,6 +37,10 @@
             <!-- Auth  -->
             <AuthPage v-else/>
 
+            <UIModal :isOpen="postTweetModal"  @onClose="handleModalClose">
+              <TweetForm :user="user" @tweet-posted="handleUpdate" :popup="true"/>
+            </UIModal>
+
           </div>
         </div>
       </NMessageProvider>
@@ -49,12 +53,32 @@
   import useAuth from "./composbles/useAuth";  
   import { NMessageProvider, NConfigProvider } from 'naive-ui'
   import { compareAsc, format } from "date-fns";
+  import useTweets from '~/composbles/useTweets';
 
   const darkMode = ref(false)
 
+  const { closePostTweetModal, usePostTweetModal, openPostTweetModal, useReplyTweet } = useTweets()
   const { useAuthUser, initAuth, useAuthLoading } = useAuth()
   const isAuthLoading = useAuthLoading()
   const user = useAuthUser()
+  
+  const postTweetModal = usePostTweetModal()
+
+  function handleUpdate(tweet) {
+    closePostTweetModal()
+
+    navigateTo({
+        path: `/status/${tweet.id}`
+    })
+  }
+
+  function handleModalClose() {
+    closePostTweetModal()
+  }
+
+  function handleOpenTweetModal() {
+    openPostTweetModal(null)
+  }
 
   onBeforeMount(() => {
     initAuth()

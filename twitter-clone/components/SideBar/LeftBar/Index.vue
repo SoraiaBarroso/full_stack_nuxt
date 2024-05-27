@@ -95,24 +95,12 @@
                 </template>
             </SideBarLeftBarTab>
             
-            <NModal
-                v-model:show="showModal"
-                class="custom-card"
-                preset="card"
-                :bordered="false"
-                size="huge"
-                :style="bodyStyle"
-                :segmented="segmented"
-            >            
-                <TweetForm :user="user" @tweet-posted="handleUpdate" :popup="true"/>
-            </NModal>
-
-            <div class="hidden md:block xl:block" @click="showModal = true">
-                <UIButton liquid size="lg">Tweet</UIButton>
+            <div class="hidden md:block xl:block">
+                <UIButton liquid size="lg" @on-click="emits('click')">Tweet</UIButton>
             </div>
 
-            <div class="block md:hidden xl:hidden" @click="showModal = true">
-                <UIButton>
+            <div class="block md:hidden xl:hidden">
+                <UIButton @on-click="emits('click')">
                     <div class="w-6 h-6 font-bold">
                         <IconsPostIcon/>
                     </div>
@@ -133,7 +121,7 @@ const { defaultTransition } = useTailwindConfig
 const user = useAuthUser()
 
 const activeTab = ref('home'); // Default active tab
-const showModal = ref(false)
+const emits = defineEmits(['click'])
 
 const setActiveTab = (tab) => {
     activeTab.value = tab;
@@ -148,12 +136,5 @@ const bodyStyle = {
 const segmented = {
   content: 'soft',
   footer: 'soft'
-}
-
-function handleUpdate(tweet) {
-    showModal.value = false
-    navigateTo({
-        path: `/status/${tweet.id}`
-    })
 }
 </script>

@@ -43,7 +43,7 @@
                 </div>
             </div>
             
-            <div class="w-24">
+            <div class="w-24 flex justify-end align-middle">
                 <UIButton size="sm" :liquid="props.popup" :disabled="isDisabled" @onClick="handleFormSubmit">Tweet</UIButton>
             </div>
         </div>

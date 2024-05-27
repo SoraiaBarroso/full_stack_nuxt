@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', "nuxtjs-naive-ui"], 
   plugins: [ { src: '~/plugins/client-analytics.js', mode: 'client' }],
 
+  build: {
+    transpile: ['vueuc'],
+  },
+  
   runtimeConfig: {
     jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
     jwtRefreshSecret: process.env.JWT_REFRESH_TOKEN_SECRET,

@@ -7,7 +7,7 @@
 
             <div class="border-b border-white-200 dark:border-gray-700">
                 <!-- pass user object -->
-                <TweetForm :user="user" @tweetPosted="reloadHomeTweets"/>
+                <TweetForm :user="user" @tweet-posted="reloadHomeTweets"/>
             </div>
 
             <TweetListFeed :tweets="homeTweets" />

@@ -44,6 +44,7 @@ async function handleFormSubmit(data) {
             mediaFiles: data.mediaFiles,
             replyTo: props.replyTo?.id
         })
+        
         emit('tweetPosted', response.tweet)
     } catch(error) {
         console.log(error)

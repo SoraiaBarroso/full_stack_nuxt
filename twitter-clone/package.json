@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "@nuxt/image": "^1.7.0",
     "@prisma/client": "^5.13.0",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/analytics": "^1.2.2",

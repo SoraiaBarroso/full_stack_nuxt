@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', "nuxtjs-naive-ui"], 
+  modules: ['@nuxtjs/tailwindcss', "nuxtjs-naive-ui", "@nuxt/image"], 
   plugins: [ { src: '~/plugins/client-analytics.js', mode: 'client' }],
 
   build: {

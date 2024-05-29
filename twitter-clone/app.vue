@@ -52,8 +52,16 @@
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
   import { NMessageProvider, NConfigProvider } from 'naive-ui'
-  import { compareAsc, format } from "date-fns";
   import useTweets from '~/composbles/useTweets';
+
+  useSeoMeta({
+    title: 'My Twitter Clone',
+    ogTitle: 'My Twitter Clone',
+    description: 'This is my Fullstack Twitter Clone',
+    ogDescription: 'This is my Fullstack Twitter Clone',
+    lang: 'en'
+    // ogImage: 'https://example.com/image.png',
+  })
 
   const darkMode = ref(false)
 

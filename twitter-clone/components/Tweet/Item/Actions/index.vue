@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between">
         <div class="flex items-center w-3/4 justify-between">
-            <TweetItemActionsIcons color="blue">
+            <TweetItemActionsIcons @on-click="emits('onCommentClick')" color="blue">
                 <template v-slot:icon="{ classes }">
                     <IconsChatIcon :class="classes"/>
                 </template>
@@ -68,6 +68,8 @@ const props = defineProps({
         required: true
     }
 })
+
+const emits = defineEmits(['onCommentClick'])
 
 function generateRandomNumber() {
     let ran = Math.floor(Math.random() * 10000);

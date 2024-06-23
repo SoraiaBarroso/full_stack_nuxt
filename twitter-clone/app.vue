@@ -53,6 +53,7 @@
   import useAuth from "./composbles/useAuth";  
   import { NMessageProvider, NConfigProvider } from 'naive-ui'
   import useTweets from '~/composbles/useTweets';
+import useEmitter from "./composbles/useEmitter";
 
   useSeoMeta({
     title: 'My Twitter Clone',
@@ -60,7 +61,12 @@
     description: 'This is my Fullstack Twitter Clone',
     ogDescription: 'This is my Fullstack Twitter Clone',
     lang: 'en'
-    // ogImage: 'https://example.com/image.png',
+  })
+
+  const emitter = useEmitter()
+
+  emitter.$on('replyTweet', (tweet) => {
+    openPostTweetModal(tweet)
   })
 
   const darkMode = ref(false)

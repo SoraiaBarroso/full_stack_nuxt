@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="mt-1 mr-5">
-                    <TweetItemActions :tweet="tweet"/>
+                    <TweetItemActions :tweet="tweet" @on-comment-click="handleCommentClick"/>
                 </div>
 
             </div>
@@ -22,6 +22,8 @@
     </NuxtLink>
 </template>
 <script setup>
+import useEmitter from '~/composbles/useEmitter';
+
 const props = defineProps({
     tweet: {
         type: Object,
@@ -37,4 +39,9 @@ const textSize = computed(() => props.compact ? 'text-base' : 'text-lg')
 const tweetBodyWrapper = computed(() => props.compact ? 'ml-16' : 'ml-3 mt-6')
 const replyToTweetUrl = computed(() => `/status/${props.tweet?.id}`)
 
+const emitter = useEmitter()
+
+function handleCommentClick() {
+    emitter.$emit('replyTweet', props.tweet)
+}
 </script>

@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
    
     const refreshToken = cookies.refresh_token
 
-    console.log("api/refresh/ refresh token: ", refreshToken)
+    //console.log("api/refresh/ refresh token: ", refreshToken)
 
     if (!refreshToken) {
         return sendError(event, createError({

@@ -16,7 +16,7 @@
                 </span>
 
                 <div class="flex-1 flex justify-end items-center h-full" v-if="props.user?.name === author.name">
-                    <DeleteIcon class="w-4 h-4"/>
+                    <DeleteIcon class="w-4 h-4 text-gray-500"/>
                 </div>
             </div>
         

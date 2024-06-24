@@ -10,13 +10,20 @@
                 <TweetForm :user="user" @tweet-posted="reloadHomeTweets"/>
             </div>
 
-            <TweetListFeed :user="user" :tweets="homeTweets" />
+            <TweetListFeed :user="user" :tweets="homeTweets" @delete-succes="reloadHomeTweets"/>
         </MainSection>
     </div>
 </template>
 <script setup>
 import useAuth from '~/composbles/useAuth';
 import useTweets from '~/composbles/useTweets';
+import useEmitter from '~/composbles/useEmitter';
+
+const emitter = useEmitter()
+
+emitter.$on('deleteSuccess', (tweet) => {
+    reloadHomeTweets()
+})
 
 const homeTweets = ref([])
 const loading = ref(false)

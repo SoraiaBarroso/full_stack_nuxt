@@ -37,7 +37,7 @@
             <!-- Auth  -->
             <AuthPage v-else/>
 
-            <UIModal :isOpen="postTweetModal"  @onClose="handleModalClose">
+            <UIModal :isOpen="postTweetModal" @onClose="handleModalClose">
               {{ replyTweet }}
               <TweetForm :user="user" @tweet-posted="handleUpdate" :popup="true"/>
             </UIModal>

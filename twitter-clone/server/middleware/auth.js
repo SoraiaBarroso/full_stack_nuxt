@@ -7,7 +7,8 @@ export default defineEventHandler(async (event) => {
         '/api/auth/user',
         '/api/user/tweets',
         '/api/tweets',
-        '/api/tweets/:id'
+        '/api/tweets/:id',
+        '/api/tweets/delete'
     ]
 
     const isHandledByThisMiddleware = endpoints.some(endopoint => {
@@ -30,7 +31,6 @@ export default defineEventHandler(async (event) => {
             statusMessage: 'Unauthorized'
         }))
     }
-
 
     try {
         const userId = decoded.userId

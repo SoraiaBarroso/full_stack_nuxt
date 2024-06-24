@@ -1,6 +1,8 @@
 import useFetchApi from "./useFetchApi"
+import useAuth from "./useAuth"
 
 export default () => {
+    const { useAuthToken } = useAuth()
 
     const usePostTweetModal = () => useState('post_tweet_modal', () => false)
 
@@ -53,6 +55,39 @@ export default () => {
         })
     }
 
+    const deleteTweet = (tweetId) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const token = useAuthToken().value;
+
+                if (!token) {
+                    return reject(new Error('No auth token found'));
+                }
+
+                const response = await fetch(`/api/tweets/delete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ tweetId }) 
+                });
+    
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resolve(data);
+                } else {
+                    const errorData = await response.json();
+                    reject(new Error(errorData.error || 'Failed to delete tweet'));
+                }
+            } catch (error) {
+                reject(error); // Reject with error if request fails
+            }
+        });
+    };
+    
+
     const getTweetById = (tweetId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -72,6 +107,7 @@ export default () => {
         closePostTweetModal,
         usePostTweetModal,
         openPostTweetModal,
-        useReplyTweet
+        useReplyTweet,
+        deleteTweet
     }
 }

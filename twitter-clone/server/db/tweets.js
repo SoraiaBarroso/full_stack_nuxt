@@ -12,6 +12,14 @@ export const getTweets = (params = {}) => {
     })
 }
 
+export const deleteTweets = (tweetId) => {
+    return prisma.tweet.delete({
+        where: {
+            id: tweetId
+        }
+    })
+}
+
 export const getTweetById = (tweetId, params = {}) => {
     return prisma.tweet.findUnique({
         ...params,

@@ -42,7 +42,7 @@ export default () => {
             }
         })
     }
-
+    
     const login = ({ username, password }) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -149,6 +149,6 @@ export default () => {
         initAuth,
         useAuthLoading,
         logout, 
-        register
+        register,
     }
 }

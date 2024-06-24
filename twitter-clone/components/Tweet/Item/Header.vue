@@ -5,7 +5,7 @@
         </div>
 
         <div class="ml-3 h-auto w-full flex flex-col">
-            <div class="w-full flex h-full">
+            <div class="w-full flex">
                 <span :class="hasMargin" class=" text-gray-800 font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
                 
                 <span class="text-sm text-left w-auto font-medium text-gray-600">
@@ -15,8 +15,10 @@
                     · {{ props.tweet.postedAtHuman }}
                 </span>
 
-                <div class="flex-1 flex justify-end items-center h-full" v-if="props.user?.name === author.name">
-                    <DeleteIcon class="w-4 h-4 text-gray-500"/>
+                <div @click.stop.prevent="getThisTweetId" class="ml-auto hover:bg-blue-100 rounded-full flex justify-end items-center h-full p-1" v-if="props.user?.name === author.name">
+                    <NuxtLink :to="url">
+                        <DeleteIcon class="w-4 h-4 text-gray-500"/>
+                    </NuxtLink>
                 </div>
             </div>
         
@@ -37,6 +39,30 @@
 <script setup>
 import { computed } from 'vue';
 import DeleteIcon from '~/components/Icons/DeleteIcon.vue';
+import useTweets from '~/composbles/useTweets';
+import { useMessage } from 'naive-ui'
+import useEmitter from '~/composbles/useEmitter';
+
+const emitter = useEmitter()
+
+const {deleteTweet} = useTweets()
+const message = useMessage()
+
+const getThisTweetId = async () => {
+    try {
+        message.loading('Deleting...')
+
+        const response = await deleteTweet(props.tweet.id)
+
+        emitter.$emit('deleteSuccess')
+        
+        message.success('Deleted successful!')
+    } catch(error) {
+        console.log(error)
+    } finally {
+        message.clear()
+    }
+}
 
 const props = defineProps({
     tweet: {
@@ -48,6 +74,7 @@ const props = defineProps({
         required: false
     }
 })
+
 
 const hasMargin = computed(() => author.name ? 'mr-1' : 'mr-0')
 const author = props.tweet.author

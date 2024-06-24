@@ -10,7 +10,7 @@
 
         <div v-else class="border-x border-white-200 dark:border-gray-700"
         v-for="tweet in $props.tweets" :key="tweet.id" :class="defaultTransition">
-            <TweetItem compact :user="user" :tweet="tweet"/>        
+            <TweetItem  compact :user="user" :tweet="tweet"/>        
         </div>
     </div>
 </template>

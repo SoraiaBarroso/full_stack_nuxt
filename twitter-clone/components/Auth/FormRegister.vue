@@ -78,7 +78,7 @@ watchImmediate(model, () => {
 
 async function handleRegister() {
     try {
-        message.loading('Registring...')
+        message.loading('Registering...')
 
         await register({
             username: model.username,

@@ -10,7 +10,7 @@
                 <TweetForm :user="user" @tweet-posted="reloadHomeTweets"/>
             </div>
 
-            <TweetListFeed :tweets="homeTweets" />
+            <TweetListFeed :user="user" :tweets="homeTweets" />
         </MainSection>
     </div>
 </template>

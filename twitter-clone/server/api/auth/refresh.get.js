@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
     const rToken = await getRefreshTokenByToken(refreshToken)
     
-    console.log("api/refresh/  rtoken: ", rToken)
+    //console.log("api/refresh/  rtoken: ", rToken)
 
     if (!rToken) {
         return sendError(event, createError({

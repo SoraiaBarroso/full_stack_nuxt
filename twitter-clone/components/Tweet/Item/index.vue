@@ -1,12 +1,14 @@
 <template>
     <!-- Click tweet to go to answers -->
-    <NuxtLink :to="replyToTweetUrl" >        
-        <div class="pb-4 border-b border-white-200 dark:border-gray-700 dark:hover:bg-dim-300 cursor-pointer hover:bg-gray-50">
+    <NuxtLink :to="replyToTweetUrl">        
+        <div class="pb-4 border-b select-text border-white-200 dark:border-gray-700 dark:hover:bg-dim-300  hover:bg-gray-50">
             <TweetItemHeader :tweet="props.tweet"/>
 
             <div :class="tweetBodyWrapper">
-                <p :class="textSize" class="px-2 flex-shrink font-medium text-gray-800 w-auto dark:text-white">
-                    {{ props.tweet.text }}
+                <p :class="textSize" class="px-2 flex-shrink font-medium select-text text-gray-800 w-auto dark:text-white">
+                    <span v-for="(word, index) in parsedTweet" :key="index" :class="{'text-blue-500': word.startsWith('#')}">
+                        {{ word + " " }}
+                    </span>
                 </p>
 
                 <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mb-1 mr-4 ml-1 border-2 rounded-2xl border-white-200 dark:border-gray-700">
@@ -44,4 +46,8 @@ const emitter = useEmitter()
 function handleCommentClick() {
     emitter.$emit('replyTweet', props.tweet)
 }
+
+const parsedTweet = computed(() => {
+    return props.tweet.text.split(' ');
+})
 </script>

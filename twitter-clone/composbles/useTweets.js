@@ -71,6 +71,7 @@ export default () => {
         getTweetById,
         closePostTweetModal,
         usePostTweetModal,
-        openPostTweetModal
+        openPostTweetModal,
+        useReplyTweet
     }
 }

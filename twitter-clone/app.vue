@@ -38,6 +38,7 @@
             <AuthPage v-else/>
 
             <UIModal :isOpen="postTweetModal"  @onClose="handleModalClose">
+              {{ replyTweet }}
               <TweetForm :user="user" @tweet-posted="handleUpdate" :popup="true"/>
             </UIModal>
 
@@ -53,7 +54,7 @@
   import useAuth from "./composbles/useAuth";  
   import { NMessageProvider, NConfigProvider } from 'naive-ui'
   import useTweets from '~/composbles/useTweets';
-import useEmitter from "./composbles/useEmitter";
+  import useEmitter from "./composbles/useEmitter";
 
   useSeoMeta({
     title: 'My Twitter Clone',
@@ -77,6 +78,7 @@ import useEmitter from "./composbles/useEmitter";
   const user = useAuthUser()
   
   const postTweetModal = usePostTweetModal()
+  const replyTweet = useReplyTweet()
 
   function handleUpdate(tweet) {
     closePostTweetModal()

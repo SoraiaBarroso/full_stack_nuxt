@@ -28,7 +28,7 @@
                         Replying to
                     </span>
 
-                    <NuxtLink :to="replyToTweetUrl" class="text-blue-400">
+                    <NuxtLink :to="replyToTweetUrl" class="text-blue-400 hover:text-blue-700">
                         {{ props.tweet.replyTo.author.handle }}
                     </NuxtLink>
                  </p>

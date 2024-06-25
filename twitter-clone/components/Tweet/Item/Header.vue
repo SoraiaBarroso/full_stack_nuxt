@@ -15,10 +15,11 @@
                     · {{ props.tweet.postedAtHuman }}
                 </span>
 
-                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full w-6 flex  justify-center items-center h-6" v-if="props.user?.name === author.name">
-                    <NDropdown  @select="handleConfirm" placement="bottom-end" trigger="hover" :options="options">
+                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full w-6 flex  justify-center items-center h-6" >
+                    <NDropdown v-if="props.user?.name === author.name" @select="handleConfirm" placement="bottom-end" trigger="hover" :options="options">
                         <NButton><DeleteIcon class="w-4 h-4 text-gray-500"/></NButton>
                     </NDropdown>
+                    <DeleteIcon v-else class="w-4 h-4 text-gray-500"/>
                 </div>
             </div>
         

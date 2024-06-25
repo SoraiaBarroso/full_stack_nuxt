@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 pb-0 pl-6 flex" :class="{ 'h-auto': props.tweet.replyTo && props.tweet.replyTo.author.handle, 'h-10': !props.tweet.replyTo || !props.tweet.replyTo.author.handle }">
+    <div class="p-4 pb-0  flex" :class="{ 'h-auto': props.tweet.replyTo && props.tweet.replyTo.author.handle, 'h-10': !props.tweet.replyTo || !props.tweet.replyTo.author.handle }">
         <div>
             <img class="w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
         </div>

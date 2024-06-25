@@ -15,7 +15,7 @@
                     <img class="w-full rounded-2xl" :src="image.url" alt="Tweet image">
                 </div>
 
-                <div class="mt-1 mr-5">
+                <div class="mt-1 mr-5" v-if="!props.hideActions">
                     <TweetItemActions :tweet="tweet" @on-comment-click="handleCommentClick"/>
                 </div>
 
@@ -38,11 +38,15 @@ const props = defineProps({
     user: {
         type: Object,
         required: false
+    },
+    hideActions: {
+        type: Boolean,
+        default: false
     }
 })
 
 const textSize = computed(() => props.compact ? 'text-base' : 'text-lg')
-const tweetBodyWrapper = computed(() => props.compact ? 'ml-16' : 'ml-6 mt-6')
+const tweetBodyWrapper = computed(() => props.compact ? 'ml-14' : 'ml-3 mt-6')
 const replyToTweetUrl = computed(() => `/status/${props.tweet?.id}`)
 
 const emitter = useEmitter()

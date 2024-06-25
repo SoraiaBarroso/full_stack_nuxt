@@ -4,7 +4,8 @@
             <IconsSpinner/>
         </div>
         <div v-else>
-              <!-- pass user object -->
+            <TweetItem compact :tweet="props.replyTo" v-if="props.replyTo && props.showReply" hideActions/>
+            <!-- pass user object -->
             <TweetFormInput :popup="props.popup" :placeholder="props.placeholder" :reply-to="props.replyTo" :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>
     </div>
@@ -31,6 +32,10 @@ const props = defineProps({
         default: null
     },
     popup: {
+        type: Boolean,
+        default: false
+    },
+    showReply: {
         type: Boolean,
         default: false
     }

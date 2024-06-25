@@ -39,8 +39,7 @@
             <AuthPage v-else/>
 
             <UIModal :isOpen="postTweetModal" @onClose="handleModalClose">
-              {{ replyTweet }}
-              <TweetForm :user="user" @tweet-posted="handleUpdate" :popup="true"/>
+              <TweetForm :replyTo="replyTweet" showReply="true" :user="user" @tweet-posted="handleUpdate" :popup="true"/>
             </UIModal>
 
           </div>
@@ -66,12 +65,6 @@
     lang: 'en'
   })
 
-  const emitter = useEmitter()
-
-  emitter.$on('replyTweet', (tweet) => {
-    openPostTweetModal(tweet)
-  })
-
   const darkMode = ref(false)
 
   const { closePostTweetModal, usePostTweetModal, openPostTweetModal, useReplyTweet } = useTweets()
@@ -80,7 +73,13 @@
   const user = useAuthUser()
   
   const postTweetModal = usePostTweetModal()
+  const emitter = useEmitter()
+
   const replyTweet = useReplyTweet()
+
+  emitter.$on('replyTweet', (tweet) => {
+    openPostTweetModal(tweet)
+  })
 
   function handleUpdate(tweet) {
     closePostTweetModal()

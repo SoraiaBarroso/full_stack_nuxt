@@ -15,8 +15,7 @@
                     · {{ props.tweet.postedAtHuman }}
                 </span>
 
-                <!-- @click.stop.prevent="getThisTweetId" -->
-                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full flex justify-end items-center h-full" v-if="props.user?.name === author.name">
+                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full w-6 flex  justify-center items-center h-6" v-if="props.user?.name === author.name">
                     <NDropdown  @select="handleConfirm" placement="bottom-end" trigger="hover" :options="options">
                         <NButton><DeleteIcon class="w-4 h-4 text-gray-500"/></NButton>
                     </NDropdown>
@@ -55,7 +54,7 @@ const dialog = useDialog()
 const handleConfirm = () => {
         dialog.info({
           title: 'Delete post?',
-          content: 'This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you and from search results. ',
+          content: 'This can’t be undone and it will be removed from the timeline.',
           positiveText: 'Delete',
           negativeText: 'Cancel',
           onPositiveClick: async () => {

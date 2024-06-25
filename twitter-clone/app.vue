@@ -122,9 +122,6 @@
     },
     Dropdown: {
       borderRadius: '4px'
-    },
-    Dialog: {
-      
     }
   }
 </script>

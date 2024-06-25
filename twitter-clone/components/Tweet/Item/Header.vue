@@ -15,10 +15,11 @@
                     · {{ props.tweet.postedAtHuman }}
                 </span>
 
-                <div @click.stop.prevent="getThisTweetId" class="ml-auto hover:bg-blue-100 rounded-full flex justify-end items-center h-full p-1" v-if="props.user?.name === author.name">
-                    <NuxtLink :to="url">
-                        <DeleteIcon class="w-4 h-4 text-gray-500"/>
-                    </NuxtLink>
+                <!-- @click.stop.prevent="getThisTweetId" -->
+                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full flex justify-end items-center h-full" v-if="props.user?.name === author.name">
+                    <NDropdown  @select="handleConfirm" placement="bottom-end" trigger="hover" :options="options">
+                        <NButton><DeleteIcon class="w-4 h-4 text-gray-500"/></NButton>
+                    </NDropdown>
                 </div>
             </div>
         
@@ -40,29 +41,49 @@
 import { computed } from 'vue';
 import DeleteIcon from '~/components/Icons/DeleteIcon.vue';
 import useTweets from '~/composbles/useTweets';
-import { useMessage } from 'naive-ui'
+import { NButton, useMessage, NDropdown, NIcon, useDialog  } from 'naive-ui'
 import useEmitter from '~/composbles/useEmitter';
+import TrashIcon from '~/components/Icons/TrashIcon.vue';
 
 const emitter = useEmitter()
 
 const {deleteTweet} = useTweets()
+
 const message = useMessage()
+const dialog = useDialog()
 
-const getThisTweetId = async () => {
-    try {
-        message.loading('Deleting...')
-
-        const response = await deleteTweet(props.tweet.id)
-
-        emitter.$emit('deleteSuccess')
-        
-        message.success('Deleted successful!')
-    } catch(error) {
-        console.log(error)
-    } finally {
-        message.clear()
-    }
+const handleConfirm = () => {
+        dialog.info({
+          title: 'Delete post?',
+          content: 'This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you and from search results. ',
+          positiveText: 'Delete',
+          negativeText: 'Cancel',
+          onPositiveClick: async () => {
+            await deleteTweet(props.tweet.id)
+            emitter.$emit('deleteSuccess')   
+            message.success('Your post was deleted')
+          },
+          onNegativeClick: () => {
+            message.error('Your post was not deleted')
+          }
+    })
 }
+
+const renderIcon = (icon) => {
+  return () => {
+    return h(NIcon, null, {
+      default: () => h(icon)
+    })
+  }
+}
+
+const options = [
+    {
+        label: "Delete Tweet",
+        key: "Delete",
+        icon: renderIcon(TrashIcon)
+    },
+]
 
 const props = defineProps({
     tweet: {

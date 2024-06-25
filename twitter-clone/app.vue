@@ -1,5 +1,6 @@
 <template>
   <NConfigProvider :theme-overrides="themeOverrides" >
+    <NDialogProvider>
     <NModalProvider>
       <NMessageProvider>
         <div :class="{'dark': darkMode}">
@@ -45,14 +46,15 @@
           </div>
         </div>
       </NMessageProvider>
-  </NModalProvider>
+    </NModalProvider>
+  </NDialogProvider>
   </NConfigProvider>
 </template>
 
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
-  import { NMessageProvider, NConfigProvider } from 'naive-ui'
+  import { NMessageProvider, NConfigProvider, NDialogProvider } from 'naive-ui'
   import useTweets from '~/composbles/useTweets';
   import useEmitter from "./composbles/useEmitter";
 
@@ -110,6 +112,19 @@
       labelTextColor: !darkMode.value ? '#374151' : '#e3e3dd',
       feedbackTextColorError: !darkMode.value ? '#D22B2B' : '#ff8383',
       asteriskColor: !darkMode.value ? '#D22B2B' : '#ff8383',
+    },
+    Button: {
+      border: 0,
+      borderHover: 0,
+      textColorTextHover: '#4098FCFF',
+      textColorHoverPrimary: '#4098FCFF',
+      textColorTextHoverPrimary: '#4098FCFF',
+    },
+    Dropdown: {
+      borderRadius: '4px'
+    },
+    Dialog: {
+      
     }
   }
 </script>

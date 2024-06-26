@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 pb-0  flex" :class="{ 'h-auto': props.tweet.replyTo && props.tweet.replyTo.author.handle, 'h-10': !props.tweet.replyTo || !props.tweet.replyTo.author.handle }">
+    <div :class="headerClass">
         <div>
             <img class="w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
         </div>
@@ -93,9 +93,19 @@ const props = defineProps({
     user: {
         type: Object,
         required: false
+    },
+    isInStatusUrl: {
+        type: Boolean,
+        default: false
     }
 })
 
+const headerClass = computed(() => ({
+    'p-4 pb-0 flex': true,
+    'h-auto': props.tweet.replyTo && props.tweet.replyTo.author.handle,
+    'h-10': !props.tweet.replyTo || !props.tweet.replyTo.author.handle,
+    'h-14': props.isInStatusUrl
+}));
 
 const hasMargin = computed(() => author.name ? 'mr-1' : 'mr-0')
 const author = props.tweet.author

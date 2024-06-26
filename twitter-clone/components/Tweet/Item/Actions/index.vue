@@ -21,13 +21,14 @@
                 </template>
             </TweetItemActionsIcons>
 
-            <TweetItemActionsIcons color="red">
+            <TweetItemActionsIcons color="red" @click="handleLike">
                 <template v-slot:icon="{ classes }">
-                    <IconsHeartIcon :class="classes"/>
+                    <IconsHeartIcon :class="classes" v-if="!liked"/>
+                    <IconsHeartFilledIcon v-else class="text-red-500 h-5 w-5"/>
                 </template>
 
                 <template v-slot:default> 
-                    {{ generateRandomNumber() }}
+                    <span :class="liked ? 'text-red-500' : ''">{{ likeCount }}</span>
                 </template>
             </TweetItemActionsIcons>
 
@@ -71,13 +72,40 @@ const props = defineProps({
 
 const emits = defineEmits(['onCommentClick'])
 
+const liked = ref(false)
+const likeCount = ref(generateRandomNumber())
+
+const handleLike = () => {
+    liked.value = !liked.value
+    if (liked.value) {
+        // Increment the like count by 1
+        likeCount.value = parseLikeCount(likeCount.value) + 1
+    } else {
+        // Decrement the like count by 1
+        likeCount.value = parseLikeCount(likeCount.value) - 1
+    }
+    likeCount.value = formatLikeCount(likeCount.value)
+}
+
 function generateRandomNumber() {
     let ran = Math.floor(Math.random() * 10000);
-    if (ran > 1000) {
-        let formattedNumber = (ran / 1000).toFixed(1);
+    return formatLikeCount(ran);
+}
+
+function formatLikeCount(number) {
+    if (number > 1000) {
+        let formattedNumber = (number / 1000).toFixed(1);
         return `${formattedNumber}K`;
     } else {
-        return ran;
+        return number.toString();
+    }
+}
+
+function parseLikeCount(formattedNumber) {
+    if (formattedNumber.includes('K')) {
+        return parseFloat(formattedNumber.replace('K', '')) * 1000;
+    } else {
+        return parseInt(formattedNumber);
     }
 }
 </script>

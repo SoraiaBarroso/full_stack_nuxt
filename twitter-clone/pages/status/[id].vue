@@ -3,7 +3,7 @@
         <MainSection title="Tweet" :loading="loading">
            
             <Head>
-                <Title></Title>
+                <Title>My Twitter Clone</Title>
             </Head>
 
             <TweetDetails @reply="getTweet" :user="user" :tweet="tweet"/>

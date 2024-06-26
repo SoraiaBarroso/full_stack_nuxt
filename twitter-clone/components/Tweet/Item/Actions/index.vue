@@ -28,7 +28,7 @@
                 </template>
 
                 <template v-slot:default> 
-                    <span :class="liked ? 'text-red-500' : ''">{{ likeCount }}</span>
+                     <span :class="liked ? 'text-red-500' : ''">{{ likeCount }}</span>
                 </template>
             </TweetItemActionsIcons>
 

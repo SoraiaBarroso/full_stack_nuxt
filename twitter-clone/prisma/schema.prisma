@@ -60,6 +60,8 @@ model Tweet {
 
   // Media files
   mediaFiles   MediaFile[]
+
+  likesCount  Int        @default(0)
 }
 
 model MediaFile {

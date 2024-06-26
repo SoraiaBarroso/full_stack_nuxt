@@ -10,7 +10,7 @@
             </NuxtLink> 
         </div>
 
-        <div class="mt-2 space-y-2 flex flex-col xs:justify-center xs:align-middle">
+        <div class="mt-2 space-y-2 flex flex-col w-4/5 xs:justify-center xs:align-middle">
             <SideBarLeftBarTab 
                 :active="activeTab === 'home'"
                 @click="setActiveTab('home')"

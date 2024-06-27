@@ -4,6 +4,10 @@ TO DO:
 
 - [X] Fix NaiveUI problems when deploying to Vercel
 
+- [X] Write request so user can delete their own Tweets in real time
+
+- [ ] Write request so user can give or delete like from a tweet and update like count in real time, so there is no need to generate random like's count.
+      
 CURRENT PROGRESS:
 
 ![Captura de pantalla 2024-05-22 123351](https://github.com/SoraiaBarroso/Full_Stack_Nuxt/assets/115974717/8c5c03f7-d755-436d-9814-92acdd54a37d)

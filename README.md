@@ -6,7 +6,7 @@ TO DO:
 
 - [X] Write request so user can delete their own Tweets in real time
 
-- [ ] Write request so user can give or delete like from a tweet and update like count in real time, so there is no need to generate random like's count.
+- [X] Write request so user can give or delete like from a tweet and update like count in real time, so there is no need to generate random like's count.
       
 CURRENT PROGRESS:
 

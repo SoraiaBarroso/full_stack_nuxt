@@ -21,14 +21,14 @@
                 </template>
             </TweetItemActionsIcons>
 
-            <TweetItemActionsIcons color="red" @click="handleLike">
+            <TweetItemActionsIcons color="red" @click="handleLike" @on-click="updateTweet">
                 <template v-slot:icon="{ classes }">
                     <IconsHeartIcon :class="classes" v-if="!liked"/>
                     <IconsHeartFilledIcon v-else class="text-red-500 h-5 w-5"/>
                 </template>
 
                 <template v-slot:default> 
-                     <span :class="liked ? 'text-red-500' : ''">{{ likeCount }}</span>
+                     <span :class="liked ? 'text-red-500' : ''">{{ tweet.likesCount  }}</span>
                 </template>
             </TweetItemActionsIcons>
 
@@ -63,29 +63,52 @@
     </div>
 </template>
 <script setup>
+import useTweets from '~/composbles/useTweets';
+const { updateLikeCount } = useTweets()
+
 const props = defineProps({
     tweet: {
         type: Object,
         required: true
+    },
+    user: {
+        type: Object,
+        required: false
     }
 })
 
 const emits = defineEmits(['onCommentClick'])
 
 const liked = ref(false)
-const likeCount = ref(generateRandomNumber())
+const tweet = ref({ ...props.tweet });
 
-const handleLike = () => {
-    liked.value = !liked.value
-    if (liked.value) {
-        // Increment the like count by 1
-        likeCount.value = parseLikeCount(likeCount.value) + 1
-    } else {
-        // Decrement the like count by 1
-        likeCount.value = parseLikeCount(likeCount.value) - 1
+watchEffect(() => {
+    liked.value = tweet.value.likedBy.includes(props.user.id);
+});
+
+const handleLike = async () => {
+    liked.value = !liked.value;
+
+    try {
+        if (liked.value) {
+            // Add user ID to likedBy array and increment likesCount
+            tweet.value.likedBy.push(props.user.id);
+            tweet.value.likesCount++;
+        } else {
+            // Remove user ID from likedBy array and decrement likesCount
+            const index = tweet.value.likedBy.indexOf(props.user.id);
+            if (index !== -1) {
+                tweet.value.likedBy.splice(index, 1);
+                tweet.value.likesCount--;
+            }
+        }
+
+        // Send the updated likedBy array to the backend
+        await updateLikeCount(tweet.value.id, tweet.value.likesCount, tweet.value.likedBy);
+    } catch (error) {
+        console.error('Failed to update like:', error);
     }
-    likeCount.value = formatLikeCount(likeCount.value)
-}
+};
 
 function generateRandomNumber() {
     let ran = Math.floor(Math.random() * 10000);
@@ -98,14 +121,6 @@ function formatLikeCount(number) {
         return `${formattedNumber}K`;
     } else {
         return number.toString();
-    }
-}
-
-function parseLikeCount(formattedNumber) {
-    if (formattedNumber.includes('K')) {
-        return parseFloat(formattedNumber.replace('K', '')) * 1000;
-    } else {
-        return parseInt(formattedNumber);
     }
 }
 </script>

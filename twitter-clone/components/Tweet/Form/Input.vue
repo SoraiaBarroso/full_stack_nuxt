@@ -83,7 +83,7 @@ const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-wh
 function handleFormSubmit() {
     emit('onSubmit', {
         text: text.value,
-        mediaFiles: [selectedFile.value]
+        mediaFiles: [selectedFile.value],
     })
 }
 

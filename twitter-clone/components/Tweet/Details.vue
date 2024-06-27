@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TweetItem :tweet="props.tweet"/>
+        <TweetItem :user="user" :tweet="props.tweet"/>
 
         <TweetForm placeholder="Tweet your reply" :reply-to="props.tweet" :user="props.user" 
         @tweet-posted="handleUpdate"/>

@@ -20,6 +20,21 @@ export const deleteTweets = (tweetId) => {
     })
 }
 
+export const updateLikeCount = (tweetId, newLikesCount, likedBy) => {
+
+    return prisma.tweet.update({
+        where: {
+            id: tweetId
+        },
+        data: {
+            likesCount: newLikesCount,
+            likedBy: {
+                set: likedBy 
+            }
+        }
+    })
+}
+
 export const getTweetById = (tweetId, params = {}) => {
     return prisma.tweet.findUnique({
         ...params,

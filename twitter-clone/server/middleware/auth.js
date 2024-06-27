@@ -8,7 +8,8 @@ export default defineEventHandler(async (event) => {
         '/api/user/tweets',
         '/api/tweets',
         '/api/tweets/:id',
-        '/api/tweets/delete'
+        '/api/tweets/delete',
+        '/api/tweets/update'
     ]
 
     const isHandledByThisMiddleware = endpoints.some(endopoint => {

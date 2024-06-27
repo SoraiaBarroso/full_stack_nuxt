@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="mt-1 mr-5" v-if="!props.hideActions">
-                    <TweetItemActions :tweet="tweet" @on-comment-click="handleCommentClick"/>
+                    <TweetItemActions :user="user" :tweet="tweet" @on-comment-click="handleCommentClick" @on-like-click="handleCommentClick"/>
                 </div>
             </div>
         </div>

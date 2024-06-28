@@ -41,7 +41,7 @@
                 <div class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsCalendarIcon/>
                 </div>
-                <div class="flex w-64 border-r h-2 pr-4 self-center justify-end items-center p-2 text-blue-500 cursor-pointer">
+                <div :class="popUpStyleMaxChars" class="flex border-r h-2 pr-4 self-center justify-end items-center p-2 text-blue-500 cursor-pointer">
                    <span>{{ wordCount }} / 256</span> 
                 </div>
             </div>
@@ -87,6 +87,7 @@ const props = defineProps({
 })
 
 const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-b border-white-200 dark:border-gray-700')
+const popUpStyleMaxChars = computed(() => props.popup ? 'w-24' : 'w-64')
 
 function handleFormSubmit() {
     emit('onSubmit', {

@@ -12,11 +12,18 @@ export const getTweets = (params = {}) => {
     })
 }
 
+export const deleteReplies = (tweetId) => {
+    return prisma.tweet.deleteMany({
+        where: {
+            replyToId: tweetId
+        } 
+    })
+}
 export const deleteTweets = (tweetId) => {
     return prisma.tweet.delete({
         where: {
-            id: tweetId
-        }
+            id: tweetId,
+        } 
     })
 }
 

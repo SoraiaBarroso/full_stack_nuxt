@@ -27,7 +27,7 @@ model User {
 
   refreshToken  RefreshToken[]
 
-  Tweet         Tweet[]
+  Tweet         Tweet[] 
 
   mediaFiles    MediaFile[]
 }

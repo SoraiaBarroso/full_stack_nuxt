@@ -1,4 +1,4 @@
-import { deleteTweets } from "~/server/db/tweets"
+import { deleteReplies, deleteTweets } from "~/server/db/tweets"
 
 export default defineEventHandler(async (event) => {
 
@@ -14,10 +14,15 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
+        const deletedReplies = await deleteReplies(tweetId)
         const deletedTweet = await deleteTweets(tweetId);
+
         return {
             statusCode: 200,
-            tweet: deletedTweet
+            tweet: { 
+                deletedTweet, 
+                deletedReplies
+            }
         };
     } catch (error) {
         return sendError(event, createError({

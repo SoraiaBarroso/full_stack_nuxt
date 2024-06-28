@@ -8,7 +8,7 @@
             <IconsSpinner/>
         </div>
         <!--Main content-->
-        <div v-else>
+        <div v-else class="border-x border-white-200">
             <slot></slot>
         </div>
     </div>

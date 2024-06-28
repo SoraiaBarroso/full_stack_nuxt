@@ -1,5 +1,5 @@
 <template>
-    <div :class="popUpStyleBorder" class="border-x ">
+    <div :class="popUpStyleBorder">
 
         <div class="flex items-center flex-shrink-0 p-4">
             
@@ -78,7 +78,7 @@ const props = defineProps({
     }
 })
 
-const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-white-200 dark:border-gray-700')
+const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-b border-white-200 dark:border-gray-700')
 
 function handleFormSubmit() {
     emit('onSubmit', {

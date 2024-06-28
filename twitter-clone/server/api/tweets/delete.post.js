@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
     try {
         const deletedTweet = await deleteTweets(tweetId);
         return {
+            statusCode: 200,
             tweet: deletedTweet
         };
     } catch (error) {

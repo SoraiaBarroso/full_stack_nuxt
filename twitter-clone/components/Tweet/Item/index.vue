@@ -5,11 +5,7 @@
             <TweetItemHeader :is-in-status-url="isInStatusUrl" :click-tweet="clickTweet" :user="user" :tweet="props.tweet"/>
 
             <div :class="tweetBodyWrapper">
-                <p :class="textSize" class="px-2 mr-1 flex-shrink font-medium text-wrap select-text break-words text-gray-800 w-auto dark:text-white">
-                    <span v-for="(word, index) in parsedTweet" :key="index" :class="{'text-blue-500 hover:text-blue-700': word.startsWith('#')}">
-                        {{ word + " " }}
-                    </span>
-                </p>
+                <p :class="textSize" class="px-2 mr-1 flex-shrink font-medium text-wrap select-text break-words text-gray-800 w-auto dark:text-white" v-html="formattedTweet"></p>
 
                 <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mb-1 mr-4 ml-1 border-2 rounded-2xl border-white-200 dark:border-gray-700">
                     <img class="w-full rounded-2xl" :src="image.url" alt="Tweet image">
@@ -25,6 +21,7 @@
 <script setup>
 import useEmitter from '~/composbles/useEmitter';
 import { useRoute } from 'vue-router';
+import { computed } from 'vue';
 
 const props = defineProps({
     tweet: {
@@ -55,9 +52,14 @@ function handleCommentClick() {
     emitter.$emit('replyTweet', props.tweet)
 }
 
-const parsedTweet = computed(() => {
-    return props.tweet.text.split(' ');
-})
+const formattedTweet = computed(() => {
+  return props.tweet.text
+    .split(' ')
+    .map(word => word.startsWith('#')
+      ? `<span class="text-blue-500 hover:text-blue-700">${word}</span>`
+      : word)
+    .join(' ');
+});
 
 const route = useRoute();
 

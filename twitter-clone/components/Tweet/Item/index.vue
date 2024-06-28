@@ -5,7 +5,7 @@
             <TweetItemHeader :is-in-status-url="isInStatusUrl" :click-tweet="clickTweet" :user="user" :tweet="props.tweet"/>
 
             <div :class="tweetBodyWrapper">
-                <p :class="textSize" class="px-2 mr-1 flex-shrink font-medium select-text text-gray-800 w-auto dark:text-white">
+                <p :class="textSize" class="px-2 mr-1 flex-shrink font-medium text-wrap select-text break-words text-gray-800 w-auto dark:text-white">
                     <span v-for="(word, index) in parsedTweet" :key="index" :class="{'text-blue-500 hover:text-blue-700': word.startsWith('#')}">
                         {{ word + " " }}
                     </span>

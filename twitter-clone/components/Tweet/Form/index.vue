@@ -4,7 +4,7 @@
             <IconsSpinner/>
         </div>
         <div v-else>
-            <TweetItem compact :tweet="props.replyTo" v-if="props.replyTo && props.showReply" hideActions/>
+            <TweetItem compact :tweet="props.replyTo" :user="user" v-if="props.replyTo && props.showReply" hideActions/>
             <!-- pass user object -->
             <TweetFormInput :popup="props.popup" :placeholder="props.placeholder" :reply-to="props.replyTo" :user="props.user" @onSubmit="handleFormSubmit"/>
         </div>

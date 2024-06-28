@@ -24,7 +24,7 @@
         </div>
 
         <!-- Icons -->
-        <div class="flex justify-between pl-14 pr-6 pb-3" :class="popUpStyleFooter">
+        <div class="flex justify-between items-center pl-14 pr-6 pb-3" :class="popUpStyleFooter">
             <div class="flex">
                 <div @click="handleImageClick" class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsImageIcon/>
@@ -40,6 +40,9 @@
                 </div>
                 <div class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsCalendarIcon/>
+                </div>
+                <div class="flex w-64 border-r h-2 pr-4 self-center justify-end items-center p-2 text-blue-500 cursor-pointer">
+                   <span>{{ wordCount }} / 256</span> 
                 </div>
             </div>
             
@@ -57,7 +60,12 @@ const imageInput = ref()
 const selectedFile = ref(null)
 const inputImageUrl = ref(null)
 
-const isDisabled = computed(() => text.value === '')
+const isDisabled = computed(() => text.value === '' || text.value.length > 256)
+const wordCount = ref("0")
+
+watchEffect(() => {
+    wordCount.value = text.value.length
+})
 
 const props = defineProps({
     user: {

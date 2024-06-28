@@ -59,9 +59,13 @@ const handleConfirm = () => {
           positiveText: 'Delete',
           negativeText: 'Cancel',
           onPositiveClick: async () => {
-            await deleteTweet(props.tweet.id)
-            emitter.$emit('deleteSuccess')   
-            message.success('Your post was deleted')
+            try {
+                await deleteTweet(props.tweet.id)
+                emitter.$emit('deleteSuccess')   
+                message.success('Your post was deleted')
+            } catch(error) {
+                message.error('Error deleting post')
+            }
           },
           onNegativeClick: () => {
             message.error('Your post was not deleted')

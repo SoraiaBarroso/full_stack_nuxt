@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody(event)
 
-    const {tweetId }= body
+    const { tweetId } = body
     
     if (!tweetId) {
         return sendError(event, createError({

@@ -53,16 +53,16 @@ const message = useMessage()
 const dialog = useDialog()
 
 const handleConfirm = () => {
-        dialog.info({
+        dialog.error({
           title: 'Delete post?',
-          content: 'This can’t be undone and it will be removed from the timeline.',
+          content: 'This can’t be undone. Deleting this tweet will also remove all its replies.',
           positiveText: 'Delete',
           negativeText: 'Cancel',
           onPositiveClick: async () => {
             try {
                 await deleteTweet(props.tweet.id)
                 emitter.$emit('deleteSuccess')   
-                message.success('Your post was deleted')
+                message.error('Your post was deleted')
             } catch(error) {
                 message.error('Error deleting post')
             }

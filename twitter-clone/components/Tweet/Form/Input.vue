@@ -24,7 +24,7 @@
         </div>
 
         <!-- Icons -->
-        <div class="flex justify-between items-center pl-14 pr-6 pb-3" :class="popUpStyleFooter">
+        <div class="flex justify-between items-center pl-14 pr-6 pb-3">
             <div class="flex">
                 <div @click="handleImageClick" class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsImageIcon/>
@@ -87,7 +87,7 @@ const props = defineProps({
 })
 
 const popUpStyleBorder = computed(() => props.popup ? 'border-none' : 'border-b border-white-200 dark:border-gray-700')
-const popUpStyleMaxChars = computed(() => props.popup ? 'w-24' : 'w-64')
+const popUpStyleMaxChars = computed(() => props.popup ? 'w-24' : 'w-60')
 
 function handleFormSubmit() {
     emit('onSubmit', {

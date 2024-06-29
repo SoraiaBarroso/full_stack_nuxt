@@ -12,8 +12,6 @@ export default async (url, options = {}) => {
         }
     });
             
-    console.log("auth token", authToken.value);
-
     return $fetch(url, {
         ...options,
         headers: {

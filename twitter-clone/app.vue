@@ -53,7 +53,7 @@
 <script setup>
   import { SpeedInsights } from "@vercel/speed-insights/vue"
   import useAuth from "./composbles/useAuth";  
-  import { NMessageProvider, NConfigProvider, NDialogProvider } from 'naive-ui'
+  import { NMessageProvider, NConfigProvider, NDialogProvider, NModalProvider } from 'naive-ui'
   import useTweets from '~/composbles/useTweets';
   import useEmitter from "./composbles/useEmitter";
 

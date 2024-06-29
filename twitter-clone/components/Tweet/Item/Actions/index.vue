@@ -21,7 +21,7 @@
                 </template>
             </TweetItemActionsIcons>
 
-            <TweetItemActionsIcons color="red" @click="handleLike" @on-click="updateTweet">
+            <TweetItemActionsIcons color="red" @click="handleLike">
                 <template v-slot:icon="{ classes }">
                     <IconsHeartIcon :class="classes" v-if="!liked"/>
                     <IconsHeartFilledIcon v-else class="text-red-500 h-5 w-5"/>

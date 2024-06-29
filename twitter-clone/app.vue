@@ -116,11 +116,16 @@
       border: 0,
       borderHover: 0,
       textColorTextHover: '#4098FCFF',
+      textColorGhostHover: '#21B060FF',
       textColorHoverPrimary: '#4098FCFF',
       textColorTextHoverPrimary: '#4098FCFF',
     },
     Dropdown: {
       borderRadius: '4px'
+    },
+    Dialog: {
+      iconSize: 0,
+      contentMargin: "10px 4px 4px 4px"
     }
   }
 </script>

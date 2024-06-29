@@ -62,7 +62,7 @@ const handleConfirm = () => {
             try {
                 await deleteTweet(props.tweet.id)
                 emitter.$emit('deleteSuccess')   
-                message.error('Your post was deleted')
+                message.success('Your post was deleted')
             } catch(error) {
                 message.error('Error deleting post')
             }

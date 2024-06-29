@@ -5,7 +5,7 @@
                 <Title>Home / Twitter</Title>
             </Head>
 
-            <div class="border-b border-white-200 dark:border-gray-700">
+            <div>
                 <!-- pass user object -->
                 <TweetForm :user="user" @tweet-posted="reloadHomeTweets"/>
             </div>

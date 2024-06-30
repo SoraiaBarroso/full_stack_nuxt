@@ -63,12 +63,14 @@ function getRandomUser(arr) {
 const search = ref('')
 
 const handleSearch = () => {
-  useRouter().push({
-    path: '/search',
-    query: {
-      q: search.value
-    }
-  })
+  if (search.value !== '') {
+      useRouter().push({
+      path: '/search',
+      query: {
+        q: search.value
+      }
+    })
+  }
 }
 
 const names = [

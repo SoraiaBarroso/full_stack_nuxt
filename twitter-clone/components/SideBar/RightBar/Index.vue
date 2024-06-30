@@ -1,6 +1,21 @@
 <template>
     <div class="flex flex-col">
-        <!-- Input search -->
+        <!-- Search Bar -->
+        <div class="relative m-2">
+          <div class="absolute flex items-center h-full pl-4 text-gray-600 cursor-pointer">
+              <div class="w-6 h-6 flex justify-center items-center">
+                  <IconsSearchIcon @click="handleSearch"/>
+              </div>
+          </div>
+          <input
+              v-model="search"
+              @keydown.enter="handleSearch"
+              class="flex items-center h-9 w-full pl-12 text-sm font-normal text-black dark:text-gray-100 bg-gray-100 border border-gray-200 rounded-full
+              shadow dark:bg-dim-400 dark:border-dim-400 focus:bg-gray-100 dark:focus:bg-dim-900 focus:outline-none focus:border-blue-200 focus:border" 
+              type="text"
+              placeholder="Search tweet"
+              >
+        </div>
         <!-- <input type="text" placeholder="Search" class="m-2 p-2 rounded-2xl bg-gray-100 dark:bg-dim-700"/> -->
         <!-- Preview Card: whats happènign -->
         <SideBarRightBarPreviewCard title="What's happening">
@@ -43,6 +58,17 @@ import SettingsIcons from '~/components/Icons/SettingsIcons.vue';
 function getRandomUser(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
+}
+
+const search = ref('')
+
+const handleSearch = () => {
+  useRouter().push({
+    path: '/search',
+    query: {
+      q: search.value
+    }
+  })
 }
 
 const names = [

@@ -5,14 +5,14 @@
             <TweetItemHeader :is-in-status-url="isInStatusUrl" :user="user" :tweet="props.tweet"/>
 
             <div :class="tweetBodyWrapper">
-                <p :class="textSize" class="px-2 mr-1 flex-shrink font-medium text-wrap break-words text-gray-800 w-auto dark:text-white" v-html="formattedTweet"></p>
+                <p :class="textSize" class="px-3 mr-1 flex-shrink font-medium text-wrap break-words text-gray-800 w-auto dark:text-white" v-html="formattedTweet"></p>
 
                 <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mb-1 mr-4 ml-1 border-2 rounded-2xl border-white-200 dark:border-gray-700">
                     <NuxtImg :src="image.url" class="rounded-2xl w-full" alt="Tweet image"/>
                     <!-- <img class="w-full rounded-2xl" :src="image.url" alt="Tweet image"> -->
                 </div>
 
-                <div class="mt-1 mr-5" v-if="!props.hideActions">
+                <div class="mt-2 mr-5" v-if="!props.hideActions">
                     <TweetItemActions :user="user" :tweet="tweet" @on-comment-click="handleCommentClick" @on-like-click="handleCommentClick"/>
                 </div>
             </div>
@@ -44,7 +44,7 @@ const props = defineProps({
 })
 
 const textSize = computed(() => props.compact ? 'text-base' : 'text-lg')
-const tweetBodyWrapper = computed(() => props.compact ? 'ml-14' : 'ml-3 mt-4')
+const tweetBodyWrapper = computed(() => props.compact ? 'ml-14' : 'ml-2 mt-4')
 const replyToTweetUrl = computed(() => `/status/${props.tweet?.id}`)
 
 const emitter = useEmitter()

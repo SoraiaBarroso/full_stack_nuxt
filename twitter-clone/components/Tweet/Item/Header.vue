@@ -1,11 +1,11 @@
 <template>
     <div :class="headerClass">
         <div>
-            <img class="w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
+            <img class="mr-4 w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
         </div>
 
-        <div class="ml-3 h-auto w-full flex flex-col">
-            <div class="w-full h-full flex">
+        <div class="h-auto w-full flex flex-col">
+            <div class="w-full flex">
                 <span :class="hasMargin" class="text-gray-800 h-full flex items-center font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
                 
                 <span class="text-sm text-left h-full flex gap-1 items-center w-auto font-medium text-gray-600">

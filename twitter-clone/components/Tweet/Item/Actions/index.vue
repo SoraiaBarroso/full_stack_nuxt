@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between">
+    <div class="flex justify-between ml-1">
         <div class="flex items-center w-3/4 justify-between">
             <TweetItemActionsIcons @on-click="emits('onCommentClick')" color="blue">
                 <template v-slot:icon="{ classes }">

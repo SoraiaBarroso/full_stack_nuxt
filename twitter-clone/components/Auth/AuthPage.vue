@@ -19,6 +19,19 @@
     </div>
 </template>
 <script setup>
+import { useMessage } from 'naive-ui'
+const message = useMessage()
+
+onMounted(() => {
+    message.info(
+        "Note: You can log in with with admin as username and password",
+        {
+        closable: true,
+        duration: 0
+        }
+    )
+})
+
 // Variable to track whether the user is on the login or register page
 const isLoginForm = ref(true);
 

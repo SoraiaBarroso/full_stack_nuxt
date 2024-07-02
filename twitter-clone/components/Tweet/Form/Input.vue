@@ -1,5 +1,5 @@
 <template>
-    <div :class="popUpStyleBorder">
+    <div :class="popUpStyleBorder" class="border-x border-white-200 dark:border-gray-700">
 
         <div class="flex items-center flex-shrink-0 p-4">
             

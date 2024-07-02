@@ -109,7 +109,7 @@
             </div>
         </div>
         
-        <div class="flex flex-row items-center justify-center px-2 py-2  mb-5 rounded-full cursor-pointer w-14 xl:w-full hover:bg-gray-100
+        <div class="flex flex-row items-center justify-center px-2 py-2 mx-auto mt-auto mb-5 rounded-full cursor-pointer w-14 xl:w-full hover:bg-gray-100
         dark:hover:bg-dim-800" :class="defaultTransition" @click="emits('onLogout')">
             <div class="flex">
                 <img :src="props.user.profileImage" alt="user" class="w-10 h-10 rounded-full">

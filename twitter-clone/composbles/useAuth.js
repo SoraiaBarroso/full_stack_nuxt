@@ -126,7 +126,7 @@ export default () => {
         })
     }
 
-    const logout = () => {
+    const Logout = () => {
         return new Promise(async (resolve, reject) => {
             try {
                 await useFetchApi('/api/auth/logout', {
@@ -148,7 +148,7 @@ export default () => {
         useAuthToken,
         initAuth,
         useAuthLoading,
-        logout, 
+        Logout, 
         register,
     }
 }

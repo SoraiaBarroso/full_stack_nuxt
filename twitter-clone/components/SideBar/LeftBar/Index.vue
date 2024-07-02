@@ -110,18 +110,18 @@
         </div>
         
         <div class="flex flex-row items-center justify-center px-2 py-2 mx-auto mt-auto mb-5 rounded-full cursor-pointer w-14 xl:w-full hover:bg-gray-100
-        dark:hover:bg-dim-800" :class="defaultTransition" @click="emits('onLogout')">
+        dark:hover:bg-dim-800" :class="defaultTransition">
             <div class="flex">
                 <img :src="props.user.profileImage" alt="user" class="w-10 h-10 rounded-full">
                 <div class="flex-col hidden ml-2 xl:block">
                     <h1 class="text-sm font-bold text-gray-800 dark:text-white">{{ props.user.name }}</h1>
-                    <p class="text-sm text-gray-600">{{ props.user.handle }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-500">{{ props.user.handle }}</p>
                 </div>
             </div>
             <div class="hidden ml-auto xl:block">
-                <div class="w-6 h-6">
-                    <IconsChevronicon />
-                </div>
+                <NDropdown :show-arrow="true" trigger="hover" size="large" :options="options" @select="handleLogOut">
+                    <NButton><IconsChevronicon class="dark:text-white text-gray-600 hover:text-gray-600"/></NButton>
+                </NDropdown>
             </div>
         </div>
 
@@ -129,10 +129,48 @@
 </template>
 <script setup>
 import useTailwindConfig from '~/composbles/useTailwindConfig';
-import useAuth from '~/composbles/useAuth';
+import { NButton, NDropdown, NIcon, useMessage, useDialog } from 'naive-ui'
+import LogOutIcon from '~/components/Icons/LogOutIcon.vue';
 
-const { useAuthUser } = useAuth()
+const message = useMessage()
+const dialog = useDialog()
+
 const { defaultTransition } = useTailwindConfig
+
+const renderIcon = (icon) => {
+  return () => {
+    return h(NIcon, null, {
+      default: () => h(icon)
+    })
+  }
+}
+
+const handleLogOut = () => {
+    dialog.info({
+        title: 'Log out?',
+        content: 'You can always log back in at any time.',
+        positiveText: 'Log Out',
+        negativeText: 'Cancel',
+        onPositiveClick: async () => {
+        try {
+            emits('onLogout')
+        } catch(error) {
+            message.error('Error Login out')
+        }
+        },
+        onNegativeClick: () => {
+            message.success('Thanks for staying with us :)')
+        }
+    })
+}
+
+const options = [
+    {
+        label: "Log Out",
+        key: "Logout",
+        icon: renderIcon(LogOutIcon)
+    },
+]
 
 const props = defineProps({
     user: {
@@ -141,23 +179,10 @@ const props = defineProps({
     }
 })
 
-const user = useAuthUser()
-
 const activeTab = ref('home'); // Default active tab
 const emits = defineEmits(['click', 'onLogout'])
 
 const setActiveTab = (tab) => {
     activeTab.value = tab;
 };
-
-const bodyStyle = {
-  width: '550px',  
-  height: 'hug',
-  borderRadius: '20px',
-}
-
-const segmented = {
-  content: 'soft',
-  footer: 'soft'
-}
 </script>

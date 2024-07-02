@@ -57,6 +57,9 @@ import { NMessageProvider, NConfigProvider, NDialogProvider, NModalProvider } fr
 import useTweets from '~/composbles/useTweets';
 import useEmitter from "./composbles/useEmitter";
 
+const { closePostTweetModal, usePostTweetModal, openPostTweetModal, useReplyTweet } = useTweets()
+const { useAuthUser, initAuth, useAuthLoading, Logout } = useAuth()
+
 useSeoMeta({
   title: 'My Twitter Clone',
   ogTitle: 'My Twitter Clone',
@@ -66,13 +69,11 @@ useSeoMeta({
 })
 
 const handleUserLogout = () => {
-  alert('he')
+  Logout()
 }
 
 const darkMode = ref(false)
 
-const { closePostTweetModal, usePostTweetModal, openPostTweetModal, useReplyTweet } = useTweets()
-const { useAuthUser, initAuth, useAuthLoading } = useAuth()
 const isAuthLoading = useAuthLoading()
 const user = useAuthUser()
 
@@ -129,7 +130,9 @@ const themeOverrides = {
     textColorTextHoverPrimary: '#4098FCFF',
   },
   Dropdown: {
-    borderRadius: '4px'
+    borderRadius: '4px',
+    optionPrefixWidthLarge: '59px',
+    optionIconSuffixWidthLarge: '60px'
   },
   Dialog: {
     iconSize: 0,

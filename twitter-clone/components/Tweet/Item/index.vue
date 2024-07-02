@@ -9,7 +9,6 @@
 
                 <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mb-1 mr-4 ml-1 border-2 rounded-2xl border-white-200 dark:border-gray-700">
                     <NuxtImg :src="image.url" class="rounded-2xl w-full" alt="Tweet image"/>
-                    <!-- <img class="w-full rounded-2xl" :src="image.url" alt="Tweet image"> -->
                 </div>
 
                 <div class="mt-2 mr-5" v-if="!props.hideActions">
@@ -57,7 +56,7 @@ const formattedTweet = computed(() => {
   return props.tweet.text
     .split(' ')
     .map(word => word.startsWith('#')
-      ? `<span class="text-blue-500 hover:text-blue-700">${word}</span>`
+      ? `<span class="text-blue-500 dark:text-blue-400 dark:hover:text-blue-500 hover:text-blue-700">${word}</span>`
       : word)
     .join(' ');
 });

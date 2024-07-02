@@ -81,6 +81,10 @@
     openPostTweetModal(tweet)
   })
 
+  emitter.$on('toggleDarkMode', () => {
+    darkMode.value = !darkMode.value
+  })
+
   function handleUpdate(tweet) {
     closePostTweetModal()
 

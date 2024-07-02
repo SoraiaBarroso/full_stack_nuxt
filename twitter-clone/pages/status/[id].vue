@@ -1,5 +1,5 @@
 <template>
-    <div class="border-x border-white-200 dark:border-gray-700">
+    <div>
         <MainSection title="Tweet" :loading="loading">
            
             <Head>

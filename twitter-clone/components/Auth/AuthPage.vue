@@ -27,7 +27,7 @@ onMounted(() => {
         "Note: You can log in with with admin as username and password",
         {
         closable: true,
-        duration: 0
+        duration: 10000
         }
     )
 })

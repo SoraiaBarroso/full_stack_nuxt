@@ -10,18 +10,18 @@
           <input
               v-model="search"
               @keydown.enter="handleSearch"
-              class="flex items-center h-9 w-full pl-12 text-sm font-normal text-black dark:text-gray-100 bg-gray-100 border border-gray-200 rounded-full
+              class="flex items-center h-9 w-full pl-12 text-sm font-normal text-black dark:text-gray-400 bg-gray-100 border border-gray-200 rounded-full
               shadow dark:bg-dim-400 dark:border-dim-400 focus:bg-gray-100 dark:focus:bg-dim-900 focus:outline-none focus:border-blue-200 focus:border" 
               type="text"
               placeholder="Search tweet"
               >
         </div>
-        <!-- <input type="text" placeholder="Search" class="m-2 p-2 rounded-2xl bg-gray-100 dark:bg-dim-700"/> -->
+
         <!-- Preview Card: whats happènign -->
         <SideBarRightBarPreviewCard title="What's happening">
             <SideBarRightBarCardItem v-for="data in whatsHappeninData">
                 <div >
-                    <p class="text-sm text-gray-500 dark:text-gray-500">{{ data.trending }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ data.trending }}</p>
 
                     <h2 class="font-bold text-gray-800 text-md dark:text-white">{{ data.title }}</h2>
 
@@ -32,6 +32,7 @@
                 </div>
             </SideBarRightBarCardItem>
         </SideBarRightBarPreviewCard>
+
         <!-- Preview Card: who to follow -->
         <SideBarRightBarPreviewCard title="Who to follow">
            <SideBarRightBarCardItem v-for="data in whoToFollowData">
@@ -50,14 +51,33 @@
                 </div>
            </SideBarRightBarCardItem>
         </SideBarRightBarPreviewCard>
+
+        <footer>
+          <ul class="mx-2 my-4 text-xs text-gray-500">
+            <li class="inline-block mx-2" v-for="data in footerData">
+              <a href="#" class="hover:underline" @click.prevent="handleToggleDarkMode(data)">{{ data }}</a>
+            </li>
+          </ul>
+        </footer>
     </div>
 </template>
 <script setup>
 import SettingsIcons from '~/components/Icons/SettingsIcons.vue';
+import useEmitter from '~/composbles/useEmitter';
+
+const emitter = useEmitter()
 
 function getRandomUser(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
+}
+
+const footerData = ['Dark mode', 'Privacy Policy', 'Cookie Policy', 'Accessability', 'Ads info', 'More', '© 2024 Twitter, Inc.']
+
+const handleToggleDarkMode = (data) => {
+  if (data === 'Dark mode') {
+    emitter.$emit('toggleDarkMode')
+  }
 }
 
 const search = ref('')

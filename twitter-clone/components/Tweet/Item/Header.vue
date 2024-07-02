@@ -8,16 +8,16 @@
             <div class="w-full flex">
                 <span :class="hasMargin" class="text-gray-800 h-full flex items-center font-bold dark:text-white hover:underline decoration-1">{{author.name}}</span>
                 
-                <span class="text-sm text-left h-full flex gap-1 items-center w-auto font-medium text-gray-600">
+                <span class="text-sm text-left h-full flex gap-1 items-center w-auto font-medium text-gray-600 dark:text-gray-400">
                     <NuxtLink to="#">
                         {{ author.handle }}
                     </NuxtLink>
                     · {{ props.tweet.postedAtHuman }}
                 </span>
 
-                <div @click.stop.prevent class="ml-auto hover:bg-blue-100 rounded-full w-6 flex justify-center items-center h-6" >
+                <div @click.stop.prevent class="ml-auto group hover:bg-blue-100 dark:hover:bg-blue-500/60 transition ease-in-out rounded-full w-6 flex justify-center items-center h-6" >
                     <NDropdown v-if="props.user?.name === author.name" @select="handleConfirm" placement="bottom-end" trigger="hover" :options="options">
-                        <NButton><DeleteIcon class="w-4 h-4 text-gray-500"/></NButton>
+                        <NButton><DeleteIcon class="w-4 h-4 text-gray-500 group-hover:text-blue-500"/></NButton>
                     </NDropdown>
                     <DeleteIcon v-else class="w-4 h-4 text-gray-500"/>
                 </div>
@@ -25,7 +25,7 @@
         
             <div class="w-full">
                 <p v-if="props.tweet.replyTo" class="text-sm mb-2">
-                    <span class="text-gray-500">
+                    <span class="text-gray-500 dark:text-gray-400">
                         Replying to
                     </span>
 

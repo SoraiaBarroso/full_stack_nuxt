@@ -41,7 +41,7 @@
                 <div class="flex justify-center items-center p-2 text-blue-500 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800 cursor-pointer">
                     <IconsCalendarIcon/>
                 </div>
-                <div :class="popUpStyleMaxChars" class="flex border-r h-2 pr-4 self-center justify-end items-center p-2 text-blue-500 cursor-pointer">
+                <div :class="popUpStyleMaxChars" class="flex border-r border-gray-200 dark:border-gray-700 h-2 pr-4 self-center justify-end items-center p-2 text-blue-500 cursor-pointer">
                    <span>{{ wordCount }} / 256</span> 
                 </div>
             </div>

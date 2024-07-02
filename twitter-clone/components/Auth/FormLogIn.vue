@@ -66,11 +66,11 @@ async function handleLogin() {
             password: model.password
         })
         
-        message.success('Login successful!')
     } catch(error) {
         model.errorMessage = error.message ? error.message.split('0 ')[1] : 'An error occurred' 
         message.error(model.errorMessage)
     } finally {
+        message.success('Login successful!')
         message.clear()
     }
 }

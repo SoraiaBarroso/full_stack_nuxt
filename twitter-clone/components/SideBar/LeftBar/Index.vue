@@ -147,7 +147,7 @@ const renderIcon = (icon) => {
 
 const handleLogOut = () => {
     dialog.info({
-        title: 'Log out?',
+        title: 'Log Out?',
         content: 'You can always log back in at any time.',
         positiveText: 'Log Out',
         negativeText: 'Cancel',

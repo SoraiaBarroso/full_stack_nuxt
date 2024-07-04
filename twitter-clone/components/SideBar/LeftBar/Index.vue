@@ -11,7 +11,7 @@
         </div>
 
         <!-- Buttons -->
-        <div class="mt-2 space-y-2 flex flex-col w-4/5 xs:justify-center xs:align-middle">
+        <div class="mt-2 space-y-2 flex flex-col  xs:justify-center xs:align-middle  w-5/6">
             <SideBarLeftBarTab 
                 :active="activeTab === 'home'"
                 @click="setActiveTab('home')"
@@ -96,7 +96,7 @@
                 </template>
             </SideBarLeftBarTab>
             
-            <div class="hidden md:block xl:block">
+            <div class="hidden md:block xl:block ml-2 w-full">
                 <UIButton liquid size="lg" @on-click="emits('click')">Tweet</UIButton>
             </div>
 
@@ -109,10 +109,11 @@
             </div>
         </div>
         
+        <!-- Log Out -->
         <div class="flex flex-row items-center justify-center px-2 py-2 mx-auto mt-auto mb-5 rounded-full cursor-pointer w-14 xl:w-full hover:bg-gray-100
         dark:hover:bg-dim-800" :class="defaultTransition">
             <div class="flex">
-                <img :src="props.user.profileImage" alt="user" class="w-10 h-10 rounded-full">
+                <NuxtImg :src="props.user.profileImage" alt="user" class="w-10 h-10 rounded-full"/>
                 <div class="flex-col hidden ml-2 xl:block">
                     <h1 class="text-sm font-bold text-gray-800 dark:text-white">{{ props.user.name }}</h1>
                     <p class="text-sm text-gray-600 dark:text-gray-500">{{ props.user.handle }}</p>

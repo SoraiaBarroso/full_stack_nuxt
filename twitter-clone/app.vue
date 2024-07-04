@@ -13,7 +13,7 @@
               <div class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-6 lg:gap-5">
                   
                     <!-- left -->
-                    <div class="md:block md:col-span-2 xs-col-span-1 xl:col-span-2 overflow-y-auto">
+                    <div class="md:block md:col-span-2 xs-col-span-1 xl:col-span-2">
                       <div class="sticky top-0">
                         <SideBarLeftBar :user="user" @click="handleOpenTweetModal"  @on-logout="handleUserLogout"/>
                       </div>

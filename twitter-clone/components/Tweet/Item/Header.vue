@@ -1,7 +1,7 @@
 <template>
     <div :class="headerClass">
         <div>
-            <img class="mr-4 w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="">
+            <NuxtImg class="mr-4 w-10 h-10 rounded-full hover:brightness-90" :src="author.profileImage" alt="user profile"/>
         </div>
 
         <div class="h-auto w-full flex flex-col">

@@ -38,7 +38,7 @@
            <SideBarRightBarCardItem v-for="data in whoToFollowData">
                 <div class="flex flex-row justify-between w-full p-2 pl-0">
                     <div class="flex flex-row">
-                        <img class="w-10 h-10 rounded-full" :src="data.image" alt="data.name">
+                        <NuxtImg class="w-10 h-10 rounded-full" :src="data.image" alt="data.name"/>
                         
                         <div class="flex flex-col ml-2 justify-between">
                             <h1 class="dark:text-white font-bold text-sm text-gray-800">{{ data.name }}</h1>

@@ -71,6 +71,21 @@ export default () => {
         })
     }
 
+    const getTweetsLiked = async (params = {}) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await useFetchApi('/api/tweets/tweetsLiked', {
+                    method: 'GET',
+                    params
+                })
+                
+                resolve(response)
+            } catch(error) {
+                reject(error)
+            }
+        })
+    }
+
     const deleteTweet = (tweetId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -156,6 +171,7 @@ export default () => {
         useReplyTweet,
         deleteTweet,
         updateLikeCount,
-        getUserTweets
+        getUserTweets,
+        getTweetsLiked
     }
 }

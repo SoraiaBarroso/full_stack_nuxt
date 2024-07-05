@@ -35,7 +35,7 @@
         </div>
 
         <div class="flex gap-4 mt-3 mx-4">
-            <p class="text-gray-600 hover:underline cursor-pointer"><strong class="text-gray-700">456</strong> Following</p>
+            <p class="text-gray-600 hover:underline cursor-pointer"><strong class="text-gray-700">860</strong> Following</p>
             <p class="text-gray-600 hover:underline cursor-pointer"><strong class="text-gray-700">456</strong> Followers</p>
         </div>
 

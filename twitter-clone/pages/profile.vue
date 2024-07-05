@@ -76,6 +76,10 @@ emitter.$on('deleteSuccess', (tweet) => {
     reloadUserTweets()
 })
 
+emitter.$on('changeProfilePicture', (tweet) => {
+    reloadUserTweets()
+})
+
 const tabIndex = ref(0)
 
 emitter.$on('changeTab', (index) => {

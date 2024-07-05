@@ -90,6 +90,37 @@ export default () => {
         })
     }
 
+    const updateProfileImg = (userId, imgUrl) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const token = useAuthToken().value;
+
+                if (!token) {
+                    return reject(new Error('No auth token found'));
+                }
+
+                const response = await fetch(`/api/user/updateImg`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ userId, imgUrl }) 
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resolve(data);
+                } else {
+                    const errorData = await response.json();
+                    reject(new Error(errorData.error || 'Failed to update tweet'));
+                }
+            } catch (error) {
+                reject(error); // Reject with error if request fails
+            }
+        });
+    };
+
     const reRefreshAccessToken = () => {
         const authToken = useAuthToken()
 
@@ -150,5 +181,6 @@ export default () => {
         useAuthLoading,
         Logout, 
         register,
+        updateProfileImg
     }
 }

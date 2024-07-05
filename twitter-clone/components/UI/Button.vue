@@ -59,7 +59,7 @@ const defaultWidth = computed(() => {
 
 const buttonClasses = computed(() => {
     const baseClasses = `${paddingClasses.value} ${props.liquid ? "w-full" : defaultWidth.value}`
-    const secondaryClasses = props.secondary ? 'bg-white border dark:bg-transparent dark:text-white border-gray-500 text-black hover:bg-gray-200' : 'bg-blue-400 hover:bg-blue-500 text-white'
+    const secondaryClasses = props.secondary ? 'bg-white border dark:bg-transparent dark:text-white dark:border-gray-500 border-gray-300 text-black hover:bg-gray-200' : 'bg-blue-400 hover:bg-blue-500 text-white'
     return `${baseClasses} ${secondaryClasses}`
 })
 

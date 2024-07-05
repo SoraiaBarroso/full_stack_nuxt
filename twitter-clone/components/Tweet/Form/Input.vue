@@ -4,7 +4,7 @@
         <div class="flex items-center flex-shrink-0 p-4">
             
             <div class="flex w-12 items-top">
-                <img :src="props.user?.profileImage" alt="" class="hover:brightness-90 inline-block w-10 h-10 rounded-full"
+                <img :src="props.user?.profileImage" alt="" class="hover:brightness-90 object-cover inline-block w-10 h-10 rounded-full"
             </div>
 
             <div class="w-full">

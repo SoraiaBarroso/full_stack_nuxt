@@ -12,6 +12,17 @@ export const createUser = (userData) => {
     })
 }
 
+export const updateProfileImg = (userId, imgUrl) => {
+    return prisma.user.update({
+        where: {
+            id: userId
+        },
+        data: {
+            profileImage: imgUrl
+        }
+    })
+}
+
 export const getUserByUsername = (username) => {
     return prisma.user.findUnique({
         where: {

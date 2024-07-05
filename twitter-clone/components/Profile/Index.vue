@@ -1,5 +1,5 @@
 <template>
-    <div class="border-x">
+    <div>
         <ProfileHeader :user="user"/>
         <ProfileInfo :user="user"/>
     </div>

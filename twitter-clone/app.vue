@@ -20,7 +20,7 @@
                     </div>
 
                     <!-- Main -->
-                    <main class="col-span-11 md:col-span-6 xl:col-span-6 overflow-y-auto">
+                    <main class="col-span-11 md:col-span-6 xl:col-span-6 overflow-y-auto border-x border-white-200 dark:border-gray-700">
                         <NuxtPage/>
                     </main>
 

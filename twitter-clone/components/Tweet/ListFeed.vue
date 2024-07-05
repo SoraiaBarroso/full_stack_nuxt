@@ -1,5 +1,5 @@
 <template>
-    <div class="border-x border-white-200 dark:border-gray-700">
+    <div>
         <div v-if="isEmptyArray && !props.detailsFeed">
             <p class="text-gray-700 dark:text-white w-full text-center pt-4">
                 No posted tweets &#x1F614;

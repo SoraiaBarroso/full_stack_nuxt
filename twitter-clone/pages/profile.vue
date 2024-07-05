@@ -14,7 +14,7 @@
                 <IconsSpinner/>
             </div>
 
-            <TweetListFeed v-else-if="tabIndex != 5" :user="user" :tweets="homeTweets" @delete-succes="reloadHomeTweets"/>
+            <TweetListFeed v-else-if="tabIndex == 0" :user="user" :tweets="homeTweets" @delete-succes="reloadHomeTweets"/>
             
             <!-- tweets liked -->
             <TweetListFeed v-else-if="tabIndex == 5" :user="user" :tweets="tweetsLiked" @delete-succes="reloadHomeTweets"/>

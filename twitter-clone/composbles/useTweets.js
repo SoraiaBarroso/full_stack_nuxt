@@ -48,7 +48,22 @@ export default () => {
                     method: 'GET',
                     params
                 })
+                
+                resolve(response)
+            } catch(error) {
+                reject(error)
+            }
+        })
+    }
 
+    const getUserTweets = async (params = {}) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await useFetchApi('/api/tweets/userTweets', {
+                    method: 'GET',
+                    params
+                })
+                
                 resolve(response)
             } catch(error) {
                 reject(error)
@@ -140,6 +155,7 @@ export default () => {
         openPostTweetModal,
         useReplyTweet,
         deleteTweet,
-        updateLikeCount
+        updateLikeCount,
+        getUserTweets
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen border-x">
+    <div class="border-x">
         <ProfileHeader :user="user"/>
         <ProfileInfo :user="user"/>
     </div>

@@ -1,4 +1,4 @@
-import { getTweets } from "~/server/db/tweets"
+import { getUserTweets } from "~/server/db/tweets"
 import { tweetTransformer } from "~/server/transformers/tweet"
 import { getQuery } from 'h3'
 
@@ -31,14 +31,12 @@ export default defineEventHandler(async (event) => {
         primsaQuery = {
             ...primsaQuery,
             where: {
-                text: {
-                    contains: query
-                }
+                authorId: query
             }
         }
     }
 
-    const tweets = await getTweets(primsaQuery)
+    const tweets = await getUserTweets(primsaQuery)
 
     return {  
         tweets: tweets.map(tweetTransformer)

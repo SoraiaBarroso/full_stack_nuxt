@@ -10,7 +10,7 @@
                 <Profile :user="user"/>
             </div>
 
-            <div v-if="loading" class="flex items-center justify-center p-4 border ">
+            <div v-if="loading" class="flex items-center justify-center p-4 border border-white-200 dark:border-gray-700">
                 <IconsSpinner/>
             </div>
 

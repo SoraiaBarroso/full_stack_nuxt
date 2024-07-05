@@ -118,7 +118,7 @@
                 <NuxtImg :src="props.user.profileImage" alt="user" class="w-10 h-10 rounded-full"/>
                 <div class="flex-col hidden ml-2 xl:block">
                     <h1 class="text-sm font-bold text-gray-800 dark:text-white">{{ props.user.name }}</h1>
-                    <p class="text-sm text-gray-600 dark:text-gray-500">{{ props.user.handle }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ props.user.handle }}</p>
                 </div>
             </div>
             <div class="hidden ml-auto xl:block">

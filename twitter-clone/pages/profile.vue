@@ -17,7 +17,9 @@
 <script setup>
 import useAuth from '~/composbles/useAuth';
 import useTweets from '~/composbles/useTweets';
+import useEmitter from '~/composbles/useEmitter';
 
+const emitter = useEmitter()
 const { useAuthUser } = useAuth()
 const { getUserTweets } = useTweets()
 
@@ -35,6 +37,7 @@ const reloadHomeTweets = async () => {
             query: user.value.id
         });
         homeTweets.value = tweets;
+        console.log(tweets)
     } catch(error) {
         console.log(error);
     } finally {
@@ -45,4 +48,8 @@ const reloadHomeTweets = async () => {
 onMounted(() => {
     reloadHomeTweets(); // Load home tweets initially
 });
+
+emitter.$on('deleteSuccess', (tweet) => {
+    reloadHomeTweets()
+})
 </script>

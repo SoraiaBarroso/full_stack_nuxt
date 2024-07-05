@@ -2,7 +2,7 @@
     <!-- Click tweet to go to answers -->
     <NuxtLink :to="replyToTweetUrl">        
         <div class="pb-4 border-b select-text border-white-200 dark:border-gray-700 dark:hover:bg-dim-300  hover:bg-gray-50">
-            <TweetItemHeader :is-in-status-url="isInStatusUrl" :user="user" :tweet="props.tweet"/>
+            <TweetItemHeader :is-in-status-url="isInStatusUrl" :user="user" :tweet="tweet"/>
 
             <div :class="tweetBodyWrapper">
                 <p :class="textSize" class="px-3 mr-1 flex-shrink font-medium text-wrap break-words text-gray-800 w-auto dark:text-white" v-html="formattedTweet"></p>

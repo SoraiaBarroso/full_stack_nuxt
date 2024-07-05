@@ -13,6 +13,7 @@
         <!-- Buttons -->
         <div class="mt-2 space-y-2 flex flex-col  xs:justify-center xs:align-middle  w-5/6">
             <SideBarLeftBarTab 
+                :link-to="'/'"
                 :active="activeTab === 'home'"
                 @click="setActiveTab('home')"
             >
@@ -75,6 +76,7 @@
             <SideBarLeftBarTab
                 :active="activeTab === 'profile'"
                 @click="setActiveTab('profile')"
+                :link-to="'profile'"
             >
                 <template v-slot:icon>
                     <IconsUserIcon/>

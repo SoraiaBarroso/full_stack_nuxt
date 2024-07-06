@@ -1,7 +1,7 @@
 <template>
     <div :class="headerClass">
         <div>
-            <NuxtImg class="mr-4 w-10 h-10 rounded-full hover:brightness-90 object-cover" :src="author.profileImage" alt="user profile"/>
+            <NuxtImg class="mr-4 w-10 mt-2 h-10 rounded-full hover:brightness-90 object-cover" :src="author.profileImage" alt="user profile"/>
         </div>
 
         <div class="h-auto w-full flex flex-col">
@@ -107,7 +107,7 @@ const props = defineProps({
 const headerClass = computed(() => ({
     'p-4 pb-0 flex': true,
     'h-auto': props.tweet.replyTo && props.tweet.replyTo.author.handle,
-    'h-10': !props.tweet.replyTo || !props.tweet.replyTo.author.handle,
+    'h-12': !props.tweet.replyTo || !props.tweet.replyTo.author.handle,
     'h-14': props.isInStatusUrl
 }));
 

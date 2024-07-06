@@ -5,3 +5,9 @@ export const createMediaFile = (mediaFile) => {
         data: mediaFile
     })
 }
+
+export const getMediaFilesUser = (params = {}) => {
+    return prisma.mediaFile.findMany({
+        ...params
+    })
+}

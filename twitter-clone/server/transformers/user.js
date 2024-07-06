@@ -1,5 +1,3 @@
-import human from "human-time"
-
 // we use this function so important information its not visible in the http request (psw)
 export const userTransformer = (user) => {
     return {
@@ -9,6 +7,6 @@ export const userTransformer = (user) => {
         username: user.username,
         profileImage: user.profileImage,
         handle: '@' + user.username,
-        createdAt: user.createdAt
+        createdAt: user.createdAt,
     }
 }

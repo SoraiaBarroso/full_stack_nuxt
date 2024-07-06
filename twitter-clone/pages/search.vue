@@ -12,7 +12,14 @@
 <script setup>
 import useTweets from '~/composbles/useTweets';
 import useAuth from '~/composbles/useAuth';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
+import useEmitter from '~/composbles/useEmitter';
+
+const emitter = useEmitter()
+
+emitter.$on('deleteSuccess', (tweet) => {
+    reloadHomeTweets()
+})
 
 const route = useRoute();
 

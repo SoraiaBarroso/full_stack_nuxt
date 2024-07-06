@@ -52,6 +52,21 @@ const {deleteTweet} = useTweets()
 const message = useMessage()
 const dialog = useDialog()
 
+const props = defineProps({
+    tweet: {
+        type: Object,
+        required: true
+    },
+    user: {
+        type: Object,
+        required: false
+    },
+    isInStatusUrl: {
+        type: Boolean,
+        default: false
+    }
+})
+
 const handleConfirm = () => {
         dialog.error({
           title: 'Delete post?',
@@ -88,21 +103,6 @@ const options = [
         icon: renderIcon(TrashIcon)
     },
 ]
-
-const props = defineProps({
-    tweet: {
-        type: Object,
-        required: true
-    },
-    user: {
-        type: Object,
-        required: false
-    },
-    isInStatusUrl: {
-        type: Boolean,
-        default: false
-    }
-})
 
 const headerClass = computed(() => ({
     'p-4 pb-0 flex': true,

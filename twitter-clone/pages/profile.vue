@@ -43,6 +43,14 @@ const userFiles = ref([])
 const user = useAuthUser()
 const loading = ref(false)
 
+const userObject = reactive({
+    id: '',
+    name: '',
+    handle: '',
+    profileImage: '',
+    // add more properties as needed
+});
+
 const userName = computed(() => user.value.name)
 const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitter`)
 

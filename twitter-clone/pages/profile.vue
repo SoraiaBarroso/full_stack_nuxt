@@ -51,6 +51,15 @@ const userObject = reactive({
     // add more properties as needed
 });
 
+const loadUserData = async () => {
+    const authUser = useAuthUser();
+    user.id = authUser.id;
+    user.name = authUser.name;
+    user.handle = authUser.handle;
+    user.profileImage = authUser.profileImage;
+    // Assign other properties as needed
+}
+
 const userName = computed(() => user.value.name)
 const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitter`)
 

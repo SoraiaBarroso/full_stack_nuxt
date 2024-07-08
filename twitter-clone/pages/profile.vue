@@ -15,10 +15,10 @@
             </div>
 
             <!-- Tweets by user -->
-            <TweetListFeed v-else-if="tabIndex == 0" :user="user" :tweets="homeTweets" @delete-succes="reloadHomeTweets"/>
+            <TweetListFeed v-else-if="tabIndex == 0" :user="user" :tweets="homeTweets"/>
             
             <!-- tweets liked -->
-            <TweetListFeed v-else-if="tabIndex == 5" :user="user" :tweets="tweetsLiked" @delete-succes="reloadHomeTweets"/>
+            <TweetListFeed v-else-if="tabIndex == 5" :user="user" :tweets="tweetsLiked"/>
         
             <ProfileMediaFiles v-else-if="tabIndex == 4" :media-files="userFiles"/>
         </MainSection>
@@ -34,8 +34,7 @@ const emitter = useEmitter()
 
 const { getUserMediaFiles } = useMediaFiles()
 const { useAuthUser } = useAuth()
-const { getUserTweets } = useTweets()
-const { getTweetsLiked } = useTweets()
+const { getUserTweets, getTweetsLiked } = useTweets()
 
 const homeTweets = ref([])
 const tweetsLiked = ref([])
@@ -46,18 +45,22 @@ const loading = ref(false)
 const userObject = reactive({
     id: '',
     name: '',
+    username: '',
+    email: '',
     handle: '',
+    createdAt: '',
     profileImage: '',
-    // add more properties as needed
 });
 
 const loadUserData = async () => {
     const authUser = useAuthUser();
-    user.id = authUser.id;
-    user.name = authUser.name;
-    user.handle = authUser.handle;
-    user.profileImage = authUser.profileImage;
-    // Assign other properties as needed
+    userObject.id = authUser.value.id;
+    userObject.name = authUser.value.name;
+    userObject.handle = authUser.value.handle;
+    userObject.profileImage = authUser.value.profileImage;
+    userObject.username = authUser.value.username,
+    userObject.email = authUser.value.email,
+    userObject.createdAt = authUser.value.createdAt
 }
 
 const userName = computed(() => user.value.name)
@@ -66,10 +69,12 @@ const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitte
 const reloadUserTweets = async () => {
     loading.value = true;
     try {
+        console.log(user.value)
         const { tweets } = await getUserTweets({
-            query: user.value.id
+            query: userObject.id
         });
         homeTweets.value = tweets;
+        console.log(homeTweets.value)
     } catch(error) {
         console.log(error);
     } finally {
@@ -81,7 +86,7 @@ const reloadUserTweetsLiked = async () => {
     loading.value = true;
     try {
         const { tweets } = await getTweetsLiked({
-            query: user.value.id
+            query: userObject.id
         });
         tweetsLiked.value = tweets;
     } catch(error) {
@@ -95,7 +100,7 @@ const getUserImages = async () => {
     loading.value = true;
     try {
         const { mediaFiles } = await getUserMediaFiles({
-            query: user.value.id
+            query: userObject.id
         })
         userFiles.value = mediaFiles 
         console.log(mediaFiles.value)
@@ -106,8 +111,9 @@ const getUserImages = async () => {
     }
 }
 
-onBeforeMount(() => {
-    reloadUserTweets();
+onBeforeMount(async () => {
+    await loadUserData();
+    await reloadUserTweets();
 });
 
 emitter.$on('deleteSuccess', (tweet) => {

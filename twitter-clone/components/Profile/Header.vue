@@ -25,7 +25,9 @@
 <script setup>
 import useAuth from '~/composbles/useAuth';
 import { useMessage } from 'naive-ui'
+import useEmitter from '~/composbles/useEmitter';
 
+const emitter = useEmitter()
 const message = useMessage()
 const { updateProfileImg } = useAuth()
 

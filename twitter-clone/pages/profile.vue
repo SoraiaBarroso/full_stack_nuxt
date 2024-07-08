@@ -20,7 +20,6 @@
             <!-- tweets liked -->
             <TweetListFeed v-else-if="tabIndex == 5" :user="user" :tweets="tweetsLiked"/>
         
-            <ProfileMediaFiles v-else-if="tabIndex == 4" :media-files="userFiles"/>
         </MainSection>
     </div>
 </template>
@@ -28,92 +27,78 @@
 import useAuth from '~/composbles/useAuth';
 import useTweets from '~/composbles/useTweets';
 import useEmitter from '~/composbles/useEmitter';
-import useMediaFiles from '~/composbles/useMediaFiles';
+import { debounce } from 'lodash';
 
 const emitter = useEmitter()
 
-const { getUserMediaFiles } = useMediaFiles()
 const { useAuthUser } = useAuth()
 const { getUserTweets, getTweetsLiked } = useTweets()
 
 const homeTweets = ref([])
 const tweetsLiked = ref([])
-const userFiles = ref([])
 const user = useAuthUser()
 const loading = ref(false)
 
-const userObject = reactive({
-    id: '',
-    name: '',
-    username: '',
-    email: '',
-    handle: '',
-    createdAt: '',
-    profileImage: '',
+const tweetCache = reactive({
+    userTweets: null,
+    likedTweets: null,
 });
-
-const loadUserData = async () => {
-    const authUser = useAuthUser();
-    userObject.id = authUser.value.id;
-    userObject.name = authUser.value.name;
-    userObject.handle = authUser.value.handle;
-    userObject.profileImage = authUser.value.profileImage;
-    userObject.username = authUser.value.username,
-    userObject.email = authUser.value.email,
-    userObject.createdAt = authUser.value.createdAt
-}
 
 const userName = computed(() => user.value.name)
 const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitter`)
 
-const reloadUserTweets = async () => {
+const reloadUserTweets = debounce(async () => {
+    if (tweetCache.userTweets) {
+        homeTweets.value = tweetCache.userTweets;
+        return;
+    }
+
     loading.value = true;
     try {
-        console.log(user.value)
-        const { tweets } = await getUserTweets({
-            query: userObject.id
-        });
+        const { tweets } = await getUserTweets({ query: user.value.id });
         homeTweets.value = tweets;
-        console.log(homeTweets.value)
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     } finally {
         loading.value = false;
     }
-}
+}, 300); 
 
-const reloadUserTweetsLiked = async () => {
+const reloadUserTweetsLiked = debounce(async () => {
+    if (tweetCache.likedTweets) {
+        tweetsLiked.value = tweetCache.likedTweets;
+        return;
+    }
+
     loading.value = true;
     try {
-        const { tweets } = await getTweetsLiked({
-            query: userObject.id
-        });
+        const { tweets } = await getTweetsLiked({ query: user.value.id });
         tweetsLiked.value = tweets;
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     } finally {
         loading.value = false;
     }
-}
+}, 300);
 
-const getUserImages = async () => {
+const loadData = async () => {
     loading.value = true;
     try {
-        const { mediaFiles } = await getUserMediaFiles({
-            query: userObject.id
-        })
-        userFiles.value = mediaFiles 
-        console.log(mediaFiles.value)
-    } catch(error) {
-        console.log(error)
+        const [userTweetsResponse, likedTweetsResponse] = await Promise.all([
+            getUserTweets({ query: user.value.id }),
+            getTweetsLiked({ query: user.value.id }),
+        ]);
+        homeTweets.value = userTweetsResponse.tweets;
+        tweetsLiked.value = likedTweetsResponse.tweets;
+    } catch (error) {
+        console.log(error);
     } finally {
         loading.value = false;
     }
-}
+};
 
-onBeforeMount(async () => {
-    await loadUserData();
-    await reloadUserTweets();
+onBeforeMount(() => {
+    loadData();
 });
 
 emitter.$on('deleteSuccess', (tweet) => {
@@ -122,14 +107,12 @@ emitter.$on('deleteSuccess', (tweet) => {
 
 const tabIndex = ref(0)
 
-emitter.$on('changeTab', (index) => {
-    tabIndex.value = index
-    if(index == 0) {
-        reloadUserTweets()
-    } else if (index == 5) {
-        reloadUserTweetsLiked()
-    } else if (index == 4) {
-        getUserImages()
-    }
-})
+emitter.$on('changeTab', async (index) => {
+  tabIndex.value = index;
+  if (index === 0) {
+    await reloadUserTweets();
+  } else if (index === 5) {
+    await reloadUserTweetsLiked();
+  } 
+});
 </script>

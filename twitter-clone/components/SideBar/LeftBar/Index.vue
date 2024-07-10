@@ -76,7 +76,7 @@
             <SideBarLeftBarTab
                 :active="activeTab === 'profile'"
                 @click="setActiveTab('profile')"
-                :link-to="'profile'"
+                :link-to="'/profile'"
             >
                 <template v-slot:icon>
                     <IconsUserIcon/>

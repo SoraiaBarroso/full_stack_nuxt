@@ -1,17 +1,17 @@
 <template>
     <div>
-        <MainSection :title="userName" :posts="homeTweets.length":loading="false">
+        <MainSection :title="userName" :posts="nbrPosts" :loading="false">
             <Head>
                 <Title>{{ title }}</Title>
             </Head>
 
             <div>
                 <!-- User profile -->
-                <Profile :user="user"/>
+                <Profile />
             </div>
 
             <div v-if="loading" class="flex items-center justify-center p-4 border border-white-200 dark:border-gray-700">
-                <IconsSpinner/>
+                <IconsSpinner />
             </div>
 
             <!-- Tweets by user -->
@@ -27,7 +27,6 @@
 import useAuth from '~/composbles/useAuth';
 import useTweets from '~/composbles/useTweets';
 import useEmitter from '~/composbles/useEmitter';
-import { debounce } from 'lodash';
 
 const emitter = useEmitter()
 
@@ -39,37 +38,22 @@ const tweetsLiked = ref([])
 const user = useAuthUser()
 const loading = ref(false)
 
-const tweetCache = reactive({
-    userTweets: null,
-    likedTweets: null,
-});
-
-const userName = computed(() => user.value.name)
-const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitter`)
-
-const reloadUserTweets = debounce(async () => {
-    if (tweetCache.userTweets) {
-        homeTweets.value = tweetCache.userTweets;
-        return;
-    }
-
+// only called on delete
+const reloadUserTweets = async () => {
     loading.value = true;
     try {
         const { tweets } = await getUserTweets({ query: user.value.id });
         homeTweets.value = tweets;
+        tweetCache.userTweets = tweets;
     } catch (error) {
         console.log(error);
     } finally {
         loading.value = false;
     }
-}, 300); 
+}; 
 
-const reloadUserTweetsLiked = debounce(async () => {
-    if (tweetCache.likedTweets) {
-        tweetsLiked.value = tweetCache.likedTweets;
-        return;
-    }
-
+// only called on delete
+const reloadUserTweetsLiked = async () => {
     loading.value = true;
     try {
         const { tweets } = await getTweetsLiked({ query: user.value.id });
@@ -79,8 +63,9 @@ const reloadUserTweetsLiked = debounce(async () => {
     } finally {
         loading.value = false;
     }
-}, 300);
+};
 
+// inital load of tweets
 const loadData = async () => {
     loading.value = true;
     try {
@@ -109,10 +94,9 @@ const tabIndex = ref(0)
 
 emitter.$on('changeTab', async (index) => {
   tabIndex.value = index;
-  if (index === 0) {
-    await reloadUserTweets();
-  } else if (index === 5) {
-    await reloadUserTweetsLiked();
-  } 
 });
+
+const userName = computed(() => user.value.name)
+const nbrPosts = computed(() => homeTweets.value.length)
+const title = computed(() => `${user.value.name} (${user.value.handle}) / Twitter`)
 </script>

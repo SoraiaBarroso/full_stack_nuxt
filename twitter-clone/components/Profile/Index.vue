@@ -5,10 +5,9 @@
     </div>
 </template>
 <script setup>
-const props = defineProps({
-    user: {
-        type: Object,
-        required: true
-    }
-})
+import useAuth from '~/composbles/useAuth';
+
+const { useAuthUser } = useAuth()
+
+const user = useAuthUser()
 </script>

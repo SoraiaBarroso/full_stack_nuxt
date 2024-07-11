@@ -63,7 +63,11 @@
     </div>
 </template>
 <script setup>
+import useEmitter from '~/composbles/useEmitter';
 import useTweets from '~/composbles/useTweets';
+
+const emitter = useEmitter()
+
 const { updateLikeCount } = useTweets()
 
 const props = defineProps({
@@ -105,6 +109,7 @@ const handleLike = async () => {
 
         // Send the updated likedBy array to the backend
         await updateLikeCount(tweet.value.id, tweet.value.likesCount, tweet.value.likedBy);
+        emitter.$emit('likeClick')
     } catch (error) {
         console.error('Failed to update like:', error);
     }

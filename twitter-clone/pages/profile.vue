@@ -40,11 +40,9 @@ const loading = ref(false)
 
 // only called on delete
 const reloadUserTweets = async () => {
-    loading.value = true;
     try {
         const { tweets } = await getUserTweets({ query: user.value.id });
         homeTweets.value = tweets;
-        tweetCache.userTweets = tweets;
     } catch (error) {
         console.log(error);
     } finally {
@@ -54,7 +52,6 @@ const reloadUserTweets = async () => {
 
 // only called on delete
 const reloadUserTweetsLiked = async () => {
-    loading.value = true;
     try {
         const { tweets } = await getTweetsLiked({ query: user.value.id });
         tweetsLiked.value = tweets;
@@ -88,6 +85,14 @@ onBeforeMount(() => {
 
 emitter.$on('deleteSuccess', (tweet) => {
     reloadUserTweets()
+})
+
+emitter.$on('likeClick', () => {
+    if (tabIndex.value == 5) {
+        reloadUserTweets()
+    } else if (tabIndex.value == 0) {
+        reloadUserTweetsLiked()
+    }
 })
 
 const tabIndex = ref(0)

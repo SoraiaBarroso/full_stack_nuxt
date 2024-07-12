@@ -26,6 +26,8 @@
 - Search for tweets
 - Limit lenght of tweets
 - Refresh tokens to keep users logged in for a certain period
+- User Profile, with posibility of changing the user image
+- Log out
 
 ## Contributors
 Special thanks to the following contributor for their invaluable help in testing the application and adding tickets: <br>

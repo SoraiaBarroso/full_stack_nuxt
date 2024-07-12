@@ -25,7 +25,7 @@ export default () => {
         setReplyTo(tweet)
     }
 
-    const postTweet = (formData) => {
+    const postTweet = async (formData) => {
         const form = new FormData()
 
         form.append('text', formData.text)
@@ -35,130 +35,97 @@ export default () => {
             form.append('media_file_' + index, mediaFile)
         })
 
-        return useFetchApi('/api/user/tweets', {
-            method: 'POST',
-            body: form
-        }) 
+        try {
+            return await useFetchApi('/api/user/tweets', {
+                method: 'POST',
+                body: form
+            })
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     const getHomeTweets = async (params = {}) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await useFetchApi('/api/tweets', {
-                    method: 'GET',
-                    params
-                })
-                
-                resolve(response)
-            } catch(error) {
-                reject(error)
-            }
-        })
+        try {
+            return await useFetchApi('/api/tweets', {
+                method: 'GET',
+                params
+            })
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     const getUserTweets = async (params = {}) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await useFetchApi('/api/tweets/userTweets', {
-                    method: 'GET',
-                    params
-                })
-                
-                resolve(response)
-            } catch(error) {
-                reject(error)
-            }
-        })
+        try {
+            return await useFetchApi('/api/tweets/userTweets', {
+                method: 'GET',
+                params
+            })
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     const getTweetsLiked = async (params = {}) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await useFetchApi('/api/tweets/tweetsLiked', {
-                    method: 'GET',
-                    params
-                })
-                
-                resolve(response)
-            } catch(error) {
-                reject(error)
-            }
-        })
+        try {
+            return await useFetchApi('/api/tweets/tweetsLiked', {
+                method: 'GET',
+                params
+            })
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
-    const deleteTweet = (tweetId) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const token = useAuthToken().value;
+    const deleteTweet = async (tweetId) => {
+        try {
+            const token = useAuthToken().value;
 
-                if (!token) {
-                    return reject(new Error('No auth token found'));
-                }
-
-                const response = await fetch(`/api/tweets/delete`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ tweetId }) 
-                });
-    
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    resolve(data);
-                } else {
-                    const errorData = await response.json();
-                    reject(new Error(errorData.error || 'Failed to delete tweet'));
-                }
-            } catch (error) {
-                reject(error); // Reject with error if request fails
+            if (!token) {
+                return reject(new Error('No auth token found'));
             }
-        });
+
+            return await fetch(`/api/tweets/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ tweetId }) 
+            });
+        } catch (error) {
+            throw new Error(error.message);
+        }
     };
     
-    const updateLikeCount = (tweetId, likesCount, likedBy) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const token = useAuthToken().value;
+    const updateLikeCount = async (tweetId, likesCount, likedBy) => {
+        try {
+            const token = useAuthToken().value;
 
-                if (!token) {
-                    return reject(new Error('No auth token found'));
-                }
-
-                const response = await fetch(`/api/tweets/update`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ tweetId, likesCount, likedBy }) 
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    resolve(data);
-                } else {
-                    const errorData = await response.json();
-                    reject(new Error(errorData.error || 'Failed to update tweet'));
-                }
-            } catch (error) {
-                reject(error); // Reject with error if request fails
+            if (!token) {
+                return reject(new Error('No auth token found'));
             }
-        });
+
+            return await fetch(`/api/tweets/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ tweetId, likesCount, likedBy }) 
+            });
+        } catch (error) {
+            throw new Error(error.message);
+        }
     };
 
-    const getTweetById = (tweetId) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await useFetchApi(`/api/tweets/${tweetId}`)
-
-                resolve(response)
-            } catch(error) {
-                reject(error)
-            }
-        })
+    const getTweetById = async (tweetId) => {
+        try {
+            return await useFetchApi(`/api/tweets/${tweetId}`)
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     return {

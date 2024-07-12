@@ -81,10 +81,9 @@ const handleConfirm = () => {
                 emitter.$emit('deleteSuccess')   
                 message.success('Your post was deleted')
             } catch(error) {
+                console.log(error)
                 message.error('Error deleting post')
-            } finally {
-                
-            }
+            } 
           },
           onNegativeClick: () => {
             message.error('Your post was not deleted')

@@ -8,7 +8,6 @@
   - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
   
 - **Backend:**
-  - [Node.js](https://nodejs.org/) - JavaScript runtime
   - [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
   - [MongoDB](https://www.mongodb.com/) - NoSQL database
   

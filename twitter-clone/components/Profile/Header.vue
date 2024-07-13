@@ -1,7 +1,7 @@
 <template>
      <div>
         <div class="w-full relative group">
-            <img src="../../public/header.jpg" loading="lazy" alt="header profile" class="w-full h-52 cursor-pointer object-cover">
+            <img src="../../public/header.jpg" alt="header profile" class="w-full h-52 cursor-pointer object-cover">
             
             <input type="file" ref="imageInput" hidden accept="image/png, image/gif, image/jpeg" @change="handleImageChange">
 

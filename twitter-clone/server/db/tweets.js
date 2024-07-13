@@ -18,6 +18,13 @@ export const getTweetsLiked = (params = {}) => {
     })
 }
 
+
+export const getUserReplies = (params = {}) => {
+    return prisma.tweet.findMany({
+        ...params
+    })
+}
+
 export const getTweets = (params = {}) => {
     return prisma.tweet.findMany({
         ...params

@@ -17,6 +17,8 @@
             <!-- Tweets by user -->
             <TweetListFeed v-else-if="tabIndex == 0" :user="user" :tweets="homeTweets"/>
             
+            <TweetListFeed v-else-if="tabIndex == 1" :user="user" :tweets="userReplies"/>
+
             <!-- tweets liked -->
             <TweetListFeed v-else-if="tabIndex == 5" :user="user" :tweets="tweetsLiked"/>
         
@@ -31,10 +33,11 @@ import useEmitter from '~/composbles/useEmitter';
 const emitter = useEmitter()
 
 const { useAuthUser } = useAuth()
-const { getUserTweets, getTweetsLiked } = useTweets()
+const { getUserTweets, getTweetsLiked, getUserReplies } = useTweets()
 
 const homeTweets = ref([])
 const tweetsLiked = ref([])
+const userReplies = ref([])
 const user = useAuthUser()
 const loading = ref(false)
 
@@ -45,9 +48,7 @@ const reloadUserTweets = async () => {
         homeTweets.value = tweets;
     } catch (error) {
         console.log(error);
-    } finally {
-        loading.value = false;
-    }
+    } 
 }; 
 
 // only called on delete
@@ -57,19 +58,28 @@ const reloadUserTweetsLiked = async () => {
         tweetsLiked.value = tweets;
     } catch (error) {
         console.log(error);
-    } finally {
-        loading.value = false;
-    }
+    } 
 };
+
+const reloadUserReplies =  async () => {
+    try {
+        const {tweets} = await getUserReplies({query: user.value.id})
+        userReplies.value = tweets
+    } catch(error) {
+        console.log(error);
+    }
+}
 
 // inital load of tweets
 const loadData = async () => {
     loading.value = true;
     try {
-        const [userTweetsResponse, likedTweetsResponse] = await Promise.all([
+        const [userTweetsResponse, likedTweetsResponse, userRepliesTweets] = await Promise.all([
             getUserTweets({ query: user.value.id }),
             getTweetsLiked({ query: user.value.id }),
+            getUserReplies({ query: user.value.id })
         ]);
+        userReplies.value = userRepliesTweets.tweets
         homeTweets.value = userTweetsResponse.tweets;
         tweetsLiked.value = likedTweetsResponse.tweets;
     } catch (error) {
@@ -92,6 +102,8 @@ emitter.$on('likeClick', () => {
         reloadUserTweets()
     } else if (tabIndex.value == 0) {
         reloadUserTweetsLiked()
+    } else if(tabIndex.value == 1) {
+        reloadUserReplies()
     }
 })
 

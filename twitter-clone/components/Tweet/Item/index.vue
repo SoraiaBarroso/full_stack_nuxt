@@ -8,7 +8,7 @@
                 <p :class="textSize" class="px-3 mr-1 flex-shrink font-medium text-wrap break-words text-gray-800 w-auto dark:text-white" v-html="formattedTweet"></p>
 
                 <div v-for="image in tweet.mediaFiles" :key="image.id" class="flex my-3 mb-1 mr-4 ml-1 border-2 rounded-2xl border-white-200 dark:border-gray-700">
-                    <NuxtImg :src="image.url" class="rounded-2xl w-full" alt="Tweet image"/>
+                    <NuxtImg :src="image.url" loading="lazy" class="rounded-2xl w-full" alt="Tweet image"/>
                 </div>
 
                 <div class="mt-2 mr-5" v-if="!props.hideActions">

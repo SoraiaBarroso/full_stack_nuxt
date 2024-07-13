@@ -44,7 +44,7 @@ export default () => {
             throw new Error(error.message)
         }
     }
-
+    
     const getHomeTweets = async (params = {}) => {
         try {
             return await useFetchApi('/api/tweets', {
@@ -70,6 +70,17 @@ export default () => {
     const getTweetsLiked = async (params = {}) => {
         try {
             return await useFetchApi('/api/tweets/tweetsLiked', {
+                method: 'GET',
+                params
+            })
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    }
+
+    const getUserReplies = async (params = {}) => {
+        try {
+            return await useFetchApi('/api/tweets/userReplies', {
                 method: 'GET',
                 params
             })
@@ -139,6 +150,7 @@ export default () => {
         deleteTweet,
         updateLikeCount,
         getUserTweets,
-        getTweetsLiked
+        getTweetsLiked,
+        getUserReplies
     }
 }

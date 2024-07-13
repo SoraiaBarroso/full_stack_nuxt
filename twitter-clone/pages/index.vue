@@ -21,10 +21,6 @@ import useEmitter from '~/composbles/useEmitter';
 
 const emitter = useEmitter()
 
-emitter.$on('deleteSuccess', (tweet) => {
-    reloadHomeTweets()
-})
-
 const homeTweets = ref([])
 const loading = ref(false)
 
@@ -45,7 +41,11 @@ const reloadHomeTweets = async () => {
     }
 }
 
+emitter.$on('deleteSuccess', (tweet) => {
+    reloadHomeTweets()
+})
+
 onBeforeMount(() => {
-    reloadHomeTweets(); // Load home tweets initially
+    reloadHomeTweets();
 });
 </script>

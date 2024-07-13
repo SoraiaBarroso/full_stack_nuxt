@@ -8,7 +8,6 @@
   - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
   
 - **Backend:**
-  - [Node.js](https://nodejs.org/) - JavaScript runtime
   - [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
   - [MongoDB](https://www.mongodb.com/) - NoSQL database
   
@@ -27,6 +26,8 @@
 - Search for tweets
 - Limit lenght of tweets
 - Refresh tokens to keep users logged in for a certain period
+- User Profile, with posibility of changing the user image
+- Log out
 
 ## Contributors
 Special thanks to the following contributor for their invaluable help in testing the application and adding tickets: <br>

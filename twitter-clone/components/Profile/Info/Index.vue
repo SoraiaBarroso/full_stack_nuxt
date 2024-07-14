@@ -35,8 +35,8 @@
         </div>
 
         <div class="flex gap-4 mt-3 mx-4">
-            <p class="text-gray-600 hover:underline cursor-pointer dark:text-gray-400"><strong class="text-gray-700 dark:text-white">860</strong> Following</p>
-            <p class="text-gray-600 hover:underline cursor-pointer dark:text-gray-400"><strong class="text-gray-700 dark:text-white">456</strong> Followers</p>
+            <p class="text-gray-600 hover:underline cursor-pointer dark:text-gray-400"><strong class="text-gray-700 dark:text-white">{{randomFollowing}}</strong> Following</p>
+            <p class="text-gray-600 hover:underline cursor-pointer dark:text-gray-400"><strong class="text-gray-700 dark:text-white">{{randomFollowers}}</strong> Followers</p>
         </div>
 
         <ProfileInfoTabs />
@@ -56,4 +56,8 @@ const formattedDate = computed(() => {
   const date = new Date(props.user.createdAt)
   return format(date, 'MMM yyyy')
 })
+
+
+const randomFollowing = Math.floor(Math.random() * 1000);
+const randomFollowers = Math.floor(Math.random() * 1000);
 </script>

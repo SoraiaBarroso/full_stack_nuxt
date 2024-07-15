@@ -60,4 +60,6 @@ const formattedDate = computed(() => {
 
 const randomFollowing = Math.floor(Math.random() * 1000);
 const randomFollowers = Math.floor(Math.random() * 1000);
+
+const randomDay = Math.floor(Math.random() * 30);
 </script>

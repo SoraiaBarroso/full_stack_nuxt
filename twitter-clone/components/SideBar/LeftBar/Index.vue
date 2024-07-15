@@ -28,6 +28,7 @@
             <SideBarLeftBarTab
                 :active="activeTab === 'explore'"
                 @click="setActiveTab('explore')"
+                :link-to="'/explore'"
             >
                 <template v-slot:icon>
                     <IconsSearchIcon/>

@@ -19,7 +19,7 @@
             <IconsSpinner/>
         </div>
         <div v-else>
-            <TweetListFeed :user="user" :tweets="searchTweets" @delete-succes="reloadHomeTweets"/>
+            <TweetListFeed explore :user="user" :tweets="searchTweets" @delete-succes="reloadHomeTweets"/>
         </div>
     </div>
 </template>

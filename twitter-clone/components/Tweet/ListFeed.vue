@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isEmptyArray && !props.detailsFeed">
+        <div v-if="isEmptyArray && !props.detailsFeed && props.explore == false">
             <p class="text-gray-700 dark:text-white w-full text-center pt-4">
                 No posted tweets &#x1F614;
             </p>
@@ -29,6 +29,10 @@ const props = defineProps({
     user: {
         type: Object,
         required: false
+    },
+    explore: {
+        type: Boolean,
+        default: false
     }
 })
 

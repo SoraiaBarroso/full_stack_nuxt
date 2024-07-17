@@ -65,7 +65,19 @@ useSeoMeta({
   ogTitle: 'My Twitter Clone',
   description: 'This is my Fullstack Twitter Clone',
   ogDescription: 'This is my Fullstack Twitter Clone',
-  lang: 'en'
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: './public/twitter-logo.png'
+    },
+  ]
 })
 
 const handleUserLogout = () => {
